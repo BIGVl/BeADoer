@@ -1,0 +1,28 @@
+.every {
+
+    display: grid;
+    grid-template-columns: 2.5rem 2.5rem auto;
+    border: 5px groove #25A18E;
+    box-shadow: 3px 3px 3px 1px gray;
+}
+
+.hours {
+    font-family:'Roboto Mono', monospace;
+   grid-column-start: 1;
+   grid-column-end: 2;
+   font-size: 1rem;
+}
+
+.minutes {
+    font-family:'Roboto Mono', monospace;
+    font-size: 1rem;
+}
+
+.row {
+    font-family:'Roboto Mono', monospace;
+    font-size: 1rem;
+    background: #9FFFCB;
+    border: none;
+    border-bottom: 1px solid black;
+}
+

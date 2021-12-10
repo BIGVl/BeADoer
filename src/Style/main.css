@@ -77,10 +77,3 @@ header {
     
 }
 
-.content::before, .content::after {
-    content: '';
-    background: black;
-    width: 1px;
-    height: 80%;
-    max-height: max-content;
-}
