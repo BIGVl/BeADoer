@@ -14,7 +14,7 @@ export default function everyday () {
     form.setAttribute('autocomplete','off');
     content.appendChild(form).classList.add('formEvery');
     form.appendChild(save).classList.add('saveEvery');
-    form.setAttribute('id','formEvery')
+    form.setAttribute('id','formEvery');
 //Creating all the inputs for the hour, minute and text of the form 
     for (let i=0;i<=24;i++) {
 
