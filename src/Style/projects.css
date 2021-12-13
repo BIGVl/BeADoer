@@ -1,0 +1,84 @@
+.content.projectsP {
+    background: #25A18E;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-right: 2rem;
+
+
+}
+
+.addCard {
+
+    width: 20%;
+    height: 50%;
+    background: #7AE582;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.addButton {
+    background: #9FFFCB;
+    width: 64%;
+    height: 50%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.addButton::before, .addButton::after {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 17%;
+    background: silver;
+}
+
+
+
+
+.addButton::after {
+    transform: rotate(90deg);
+}
+
+.addButton:hover{
+    cursor: pointer;
+    
+    
+} 
+
+.addButton:hover  {
+    
+    animation: rotate 1s forwards ;
+
+}
+
+@keyframes rotate {
+
+    50% {
+        transform: rotate(180deg);
+
+    }
+}
+
+.addButton:active {
+
+    width: 54%;
+    height: 40%;
+    animation: none;
+    
+}
+
+.addButton:hover::before, .addButton:hover::after {
+    height: 80%;
+}
+
+.addButton:active::before, .addButton:active::after {
+    height: 15%;
+}

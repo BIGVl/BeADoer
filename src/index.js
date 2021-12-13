@@ -1,31 +1,46 @@
 import _ from 'lodash';
 import './Style/main.css';
 import './Style/everyday.css';
-import './Style/notes.css'
+import './Style/notes.css';
+import './Style/projects.css'
 import everyday from './everyday.js';
-import journal from './notes.js'
+import notes from './notes.js'
+import projects from './projects.js'
 
 window.onload = everyday();
 
 //Adding functionality to the buttons to delete the current content and populate with the right content for the button
 
 const everydayOpen = document.querySelector('.everyday');
-const journalOpen = document.querySelector('.journal');
-const projects = document.querySelector('.projects');
+const notesOpen = document.querySelector('.notes');
+const projectsOpen = document.querySelector('.projects');
 const content = document.querySelector('.content')
 
 everydayOpen.addEventListener('click', ()=>{
 
+    content.classList.remove('noteP')
+    content.classList.remove('projectsP')
     if (content.firstChild) {
         content.removeChild(content.lastChild);
     }
     everyday();
 })
 
-journalOpen.addEventListener('click', ()=>{
-
+notesOpen.addEventListener('click', ()=>{
+    content.classList.remove('every');
+    content.classList.remove('projectsP')
     if (content.firstChild) {
         content.removeChild(content.lastChild);
     }
-    journal();
+    notes();
 })
+
+projectsOpen.addEventListener('click', ()=>{
+    content.classList.remove('noteP');
+    content.classList.remove('every');
+    if (content.firstChild) {
+        content.removeChild(content.lastChild);
+    }
+    projects();
+})
+
