@@ -1,3 +1,5 @@
+import {} from "date-fns";
+
 //Creates the UI for projects with the 'Projects button is pressed
 export default function createDOM () {
 
@@ -15,6 +17,24 @@ export default function createDOM () {
     const addButton = document.createElement('button');
     addCard.appendChild(addButton).classList.add('addButton');
     content.appendChild(addCard).classList.add('addCard');
+    content.appendChild(project)
+    content.appendChild(overlay)
+
+
+    addButton.addEventListener('click', ()=>{
+        const overlay = document.createElement('div')
+        const project = document.createElement('div');
+        const projectName = document.createElement('input');
+        projectName.setAttribute('type','text');
+        const submit = document.createElement('button');
+        project.appendChild(projectName).classList.add('submit');
+        project.appendChild(submit).classList.add('submit');
+        overlay.classList.add('overlay-add-project');
+        project.classList.add('project-modal');
+
+
+
+    })
 
 
     
@@ -23,7 +43,9 @@ export default function createDOM () {
 }
 
 //Creates the projects
-export const projectFactory = () => {
+const projectFactory = () => {
 
-   
+
+
+
 }
