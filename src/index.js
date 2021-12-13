@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import './Style/main.css';
 import './Style/everyday.css';
+import './Style/notes.css'
 import everyday from './everyday.js';
-import journal from './journal.js'
+import journal from './notes.js'
 
 window.onload = everyday();
 
