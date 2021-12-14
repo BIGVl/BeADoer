@@ -1,7 +1,14 @@
-.content.projectsP {
+.projects-content {
+    width: 73vw ;
+    height: 80vh;
+    position: absolute;
+    top: 3%;
+    right: 1vw;
+    min-height: fit-content;
     display: flex;
     flex-wrap: wrap;
-
+    gap: 5%;
+    padding-left: 30px;
 
 }
 
@@ -78,18 +85,151 @@
     height: 15%;
 }
 
-.overlay-add-project {
-    position: absolute;
-    background: rgba(0,0,0,0.6);
-    width: 100vh;
-    height: 100vh;
-}
-
 .project-modal {
 
-    background: blue;
-    position: absolute;
-    z-index: 10;
+    background: #00A5CF;
+    position: fixed;
+    z-index: 20;
+    width: 60vw ;
+    height: 50vh;
+    top: 15%;
+    left: 60%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    padding-top: 25px;
 
 }
 
+.project-label {
+
+    font-size: 1.6rem;
+    color: white;
+}
+
+.project-name {
+
+    border-radius: 20px;
+    font-family:'Roboto Mono', monospace;
+    height: 10%;
+    width: 50%;
+    font-size: 1.6rem;
+    border: none;
+    padding-left: 10px;
+}
+
+.project-description {
+
+    width: 70%;
+    height: 18%;
+    font-family:'Roboto Mono', monospace;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    border: none;
+    padding-left: 8px;
+
+
+
+    
+}
+
+.label-description {
+    font-size: 1.6rem;
+    color: white;
+}
+
+.submit {
+    font-family:'Roboto Mono', monospace;
+    width: 30%;
+    height: 20%;
+    background: #004E64;
+    color: white;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    
+
+}
+
+.submit:hover {
+
+    background: #9FFFCB;
+}
+
+
+.new-project-card {
+
+    width: 20%;
+    height: 50%;
+    background: #7AE582;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.new-header {
+
+    background: #25A18E;
+    color: white;
+    height: 35%;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+    
+
+    
+}
+
+.new-title {
+
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.new-due-date {
+    height: 25%;
+    width: 50%;
+    justify-self: flex-end;
+    align-self:flex-end;
+    background: inherit;
+    border: none;
+    color: white;
+    margin-top: 18%;
+}
+
+.new-description {
+    color: white;
+    font-size: 1.1rem;
+    padding-top: 25px;
+    padding-left: 15px;
+    max-width: 100%;
+    height: 50%;
+}
+
+.open-project {
+
+    font-family:'Roboto Mono', monospace;
+    background: #004E64;
+    border: none;
+    color: white;
+    width: 35%;
+    height: 15%;
+    border-radius: 10px;
+    justify-self: flex-end;
+    align-self: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.open-project:hover {
+
+    background: #9FFFCB;
+}
