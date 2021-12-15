@@ -12,6 +12,8 @@
 
 }
 
+
+
 .addCard {
 
     width: 20%;
@@ -203,6 +205,11 @@
     border: none;
     color: white;
     margin-top: 18%;
+}
+
+.due-date-label {
+    font-size: 0.9rem;
+    padding-right: 2.4rem;
 }
 
 .new-description {

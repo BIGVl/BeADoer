@@ -2,16 +2,8 @@ import { sub } from "date-fns";
 
 //Creates the UI for projects with the 'Projects button is pressed
 export default function createDOM () {
-
+//Important DOM variables 
     const content = document.querySelector('.content');
-
-    //const date = document.createElement('input');
-    //date.setAttribute('type','date');
-    //content.appendChild(date).classList.add('datetime');
-    //date.addEventListener('input', ()=>{
-    //   localStorage.setItem('Date', date.value)
-    //})
-
     const addCard = document.createElement('div');
     const addButton = document.createElement('button');
     const projects = document.createElement('div');
@@ -27,8 +19,10 @@ export default function createDOM () {
     projects.appendChild(addCard).classList.add('addCard');
     content.appendChild(projects).classList.add('projects-content');
 
+//This variable indicates the number of each localStorage item so we can save multiple instances of the same type of item. e.g. The title of each project : title0, title1, etc...
+let i= 0;
 
-
+//Displays the modal in which the user can create a new project setting a title and a description
     addButton.addEventListener('click', ()=>{
         const project = document.createElement('div');
         projectName = document.createElement('input');
@@ -52,7 +46,12 @@ export default function createDOM () {
         project.appendChild(submit).classList.add('submit');
         project.classList.add('project-modal');
         projects.appendChild(project);
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input=>{
+            input.setAttribute('autocomplete', 'off');
+        })
 
+//Adds the project's card when the user clicks submit on the modal that creates the project, adds a input date so the user can set if he wishes to, a dueDate
         submit.addEventListener('click',()=>{
 
             let overMax = document.createElement('div');
@@ -74,15 +73,22 @@ export default function createDOM () {
             newProjectCard = document.createElement('div');
             title = document.createElement('div');
             title.textContent = projectName.value;
+            const dateDiv = document.createElement('div');
             dueDate = document.createElement('input');
             dueDate.setAttribute('type', 'date');
+            dueDate.setAttribute('id', 'dueDate')
+            const dueDateLabel = document.createElement('label');
+            dueDateLabel.setAttribute('for','dueDate');
+            dueDateLabel.textContent = 'Due date:'
             headerNew = document.createElement('div');
             descriptionNew =  document.createElement('div');
             descriptionNew.textContent = description.value;
             openProject = document.createElement('button');
             openProject.textContent = 'Open';
             headerNew.appendChild(title).classList.add('new-title');
-            headerNew.appendChild(dueDate).classList.add('new-due-date');
+            dateDiv.appendChild(dueDateLabel).classList.add('due-date-label');
+            dateDiv.appendChild(dueDate).classList.add('new-due-date');
+            headerNew.appendChild(dateDiv).classList.add('date-div');
             newProjectCard.appendChild(headerNew).classList.add('new-header')
             newProjectCard.appendChild(descriptionNew).classList.add('new-description');
             newProjectCard.appendChild(openProject).classList.add('open-project');
@@ -90,8 +96,13 @@ export default function createDOM () {
             projects.appendChild(addCard).classList.add('addButon');
             projects.removeChild(project);
 
+            
 
 
+                openProject.addEventListener('click', ()=>{
+                    
+
+                })
 
     
         })
@@ -105,10 +116,3 @@ export default function createDOM () {
 
 }
 
-//Creates the projects
-const projectFactory = () => {
-
-
-
-
-}
