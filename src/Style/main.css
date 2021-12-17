@@ -78,3 +78,7 @@ header {
     
 }
 
+input:active {
+    
+    border: none;
+}

@@ -1,4 +1,7 @@
-import { sub } from "date-fns";
+import { format } from "date-fns";
+
+const storeProjectsArray = [];
+
 
 //Creates the UI for projects with the 'Projects button is pressed
 export default function createDOM () {
@@ -10,7 +13,7 @@ export default function createDOM () {
     addCard.appendChild(addButton).classList.add('addButton');
     projects.appendChild(addCard).classList.add('addCard');
     content.appendChild(projects).classList.add('projects-content');
-    const storeProjectsArray = [];
+
 
 //Displays the modal in which the user can create a new project setting a title and a description
     addButton.addEventListener('click', addProjectCard)
@@ -95,20 +98,25 @@ export default function createDOM () {
                let i = storeProjectsArray.length;
                 localStorage.setItem(`title${i}`, projectName.value );
                 localStorage.setItem(`description${i}`, description.value);
+                
+
+                
         }
-        console.log(storeProjectsArray)
+       
         
     }
 
+    //Populates the content with the projects card that have been created and stored in localStorage
 
+    (function populateProjects () {
 
+        for (let i=0;i<localStorage.length;i++) {
+            
+            const newProject = localStorage.key(i) + ' : ' + localStorage.getItem(localStorage.key(i));
+            console.log(newProject);
 
-//Populates the projects cards that have been created and pushes them in the storeProjectsArray so every time a new one is added it does not mess with the ones already created
+        }
+    })();
 
-    function getProjects () {
-
-       
-    }
-
-
+console.log(storeProjectsArray)
 }
