@@ -107,16 +107,20 @@ export default function createDOM () {
     }
 
     //Populates the content with the projects card that have been created and stored in localStorage
+const getStoredProjectsArray = [];
 
     (function populateProjects () {
 
         for (let i=0;i<localStorage.length;i++) {
             
             const newProject = localStorage.key(i) + ' : ' + localStorage.getItem(localStorage.key(i));
-            console.log(newProject);
+            if (newProject === `title${i}`) {
+
+                console.log(newProject)
+            }
 
         }
     })();
 
-console.log(storeProjectsArray)
+
 }
