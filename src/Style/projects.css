@@ -205,8 +205,8 @@
     border: none;
     color: white;
     margin-top: 18%;
-    border: 4px hidden;
     outline: 2px solid #9FFFCB;
+    border-radius: 5px;
 }
 
 .due-date-label {

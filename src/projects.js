@@ -1,10 +1,11 @@
 import { format } from "date-fns";
 
-const storeProjectsArray = [];
+let storeProjectsArray = [];
+const storeTitleArray = [];
 
 
 //Creates the UI for projects with the 'Projects button is pressed
-export default function createDOM () {
+export default function projectsPage () {
 //Important DOM variables 
     const content = document.querySelector('.content');
     const addCard = document.createElement('div');
@@ -50,7 +51,7 @@ export default function createDOM () {
         submit.addEventListener('click',submitProjectCard)
 
         function submitProjectCard() {
-            
+            let i = storeTitleArray.length;
                 let overMax = document.createElement('div');
     
                 if (projectName.value === '') return;
@@ -92,12 +93,16 @@ export default function createDOM () {
                 projects.appendChild(newProjectCard).classList.add('new-project-card');
                 projects.appendChild(addCard).classList.add('addButon');
                 projects.removeChild(project);
+
+                dueDate.addEventListener('change', ()=>{
+
+                    localStorage.setItem(`dueDate${i}`, dueDate.value)
+                })
     
             //Store the projects in the array and in the local storage
-                storeProjectsArray.push({storedTitle : projectName.value, storedDescription : description.value})
-               let i = storeProjectsArray.length;
                 localStorage.setItem(`title${i}`, projectName.value );
                 localStorage.setItem(`description${i}`, description.value);
+                storeTitleArray.push(`title${i}`)
                 
 
                 
@@ -106,19 +111,43 @@ export default function createDOM () {
         
     }
 
-    //Populates the content with the projects card that have been created and stored in localStorage
-const getStoredProjectsArray = [];
+    //Updates the storeTitleArray, so everytime the user exits or refreshes the page and then creates another project it will have the proper index
+    (function updateTitleArray () {
 
-    (function populateProjects () {
+        for (let i=0;i<localStorage.length;i++) {
+            const storedTitle = localStorage.key(i);
+            if( storedTitle.includes('title')) {
+                storeTitleArray.push(storedTitle)
+                
+                
+            }
+        }
+    })();
+   
+
+  
+    //Updates the storeProjectsArray everytime the user opens the projects tab
+    (function updateProjectsArray () {
 
         for (let i=0;i<localStorage.length;i++) {
             
-            const newProject = localStorage.key(i) + ' : ' + localStorage.getItem(localStorage.key(i));
-
+            const newProject = localStorage.key(i) + ' = ' + localStorage.getItem(localStorage.key(i));
             
 
+            if (storeProjectsArray.length <= i) {
+                
+                storeProjectsArray.push(newProject)
+                
+
+            };
         }
     })();
 
-
+    //Populates the projects cards that have been previously created 
+    
+   
+  
+  
 }
+
+
