@@ -44,7 +44,7 @@ export default function createDOM () {
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input=>{
             input.setAttribute('autocomplete', 'off');
-        })
+        });
 
 //Adds the project's card when the user clicks submit on the modal that creates the project, adds a input date so the user can set if he wishes to, a dueDate
         submit.addEventListener('click',submitProjectCard)
@@ -114,10 +114,8 @@ const getStoredProjectsArray = [];
         for (let i=0;i<localStorage.length;i++) {
             
             const newProject = localStorage.key(i) + ' : ' + localStorage.getItem(localStorage.key(i));
-            if (newProject === `title${i}`) {
 
-                console.log(newProject)
-            }
+            
 
         }
     })();
