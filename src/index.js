@@ -2,7 +2,8 @@ import _ from 'lodash';
 import './Style/main.css';
 import './Style/everyday.css';
 import './Style/notes.css';
-import './Style/projects.css'
+import './Style/projects.css';
+import deleteB from './Img/trash.png';
 import everyday from './everyday.js';
 import notes from './notes.js'
 import projects from './projects.js'

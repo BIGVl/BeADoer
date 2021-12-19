@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import deleteB from './Img/trash.png';
 
 
 
@@ -84,6 +85,22 @@ export default function projectsPage () {
                 descriptionNew.textContent = description.value;
                 const openProject = document.createElement('button');
                 openProject.textContent = 'Open';
+                const deleteProject = document.createElement('img');
+                deleteProject.setAttribute('class', 'deleteB');
+                deleteProject.setAttribute('src', deleteB);
+                
+                deleteProject.addEventListener('click', ()=>{
+                    
+                    projects.removeChild(newProjectCard);
+                    localStorage.removeItem(`title${i}`);
+                    localStorage.removeItem(`description${i}`);
+
+                    if (localStorage.getItem(`dueDate${i}`)) {
+                    localStorage.removeItem(`dueDate${i}`);
+                    }
+                    storeTitleArray.splice(i,1)
+                })
+
                 headerNew.appendChild(title).classList.add('new-title');
                 dateDiv.appendChild(dueDateLabel).classList.add('due-date-label');
                 dateDiv.appendChild(dueDate).classList.add('new-due-date');
@@ -91,6 +108,7 @@ export default function projectsPage () {
                 newProjectCard.appendChild(headerNew).classList.add('new-header')
                 newProjectCard.appendChild(descriptionNew).classList.add('new-description');
                 newProjectCard.appendChild(openProject).classList.add('open-project');
+                newProjectCard.appendChild(deleteProject);
                 projects.appendChild(newProjectCard).classList.add('new-project-card');
                 projects.appendChild(addCard).classList.add('addButon');
                 projects.removeChild(project);
@@ -111,7 +129,6 @@ export default function projectsPage () {
        
         
     }
-
     //Updates the storeTitleArray, so everytime the user exits or refreshes the page and then creates another project it will have the proper index
     (function updateTitleArray () {
 
@@ -153,10 +170,6 @@ export default function projectsPage () {
    
    (function updateInfoArrays (){
 
-        let a = 0;
-        let b = 0;
-        let c = 0;
-
     storeProjectsArray.forEach(obj=>{
 
         if (obj.key.includes(`title`)) {
@@ -169,8 +182,24 @@ export default function projectsPage () {
             dueDateArray.push(obj)
         }
     });
+  
+//Sort the arrya with the information so it will give the proper information to each project card when looping through the arrays and their keys and values
+    titleArray.sort(sortKeys);
+    descriptionArray.sort(sortKeys);
+    dueDateArray.sort(sortKeys);
     
+    function sortKeys(a,b) {
 
+        if (a.key<b.key) {
+            return -1;
+        }
+        if (a.key>b.key) {
+
+            return 1;
+        }
+        return 0;
+    }
+ 
    })();
    
   
