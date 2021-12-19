@@ -1,12 +1,11 @@
 import { format } from "date-fns";
 
-let storeProjectsArray = [];
-const storeTitleArray = [];
+
 
 
 //Creates the UI for projects with the 'Projects button is pressed
 export default function projectsPage () {
-//Important DOM variables 
+//Important DOM variables and arrays
     const content = document.querySelector('.content');
     const addCard = document.createElement('div');
     const addButton = document.createElement('button');
@@ -14,6 +13,8 @@ export default function projectsPage () {
     addCard.appendChild(addButton).classList.add('addButton');
     projects.appendChild(addCard).classList.add('addCard');
     content.appendChild(projects).classList.add('projects-content');
+    let storeProjectsArray = [];
+    const storeTitleArray = [];
 
 
 //Displays the modal in which the user can create a new project setting a title and a description
@@ -117,7 +118,7 @@ export default function projectsPage () {
         for (let i=0;i<localStorage.length;i++) {
             const storedTitle = localStorage.key(i);
             if( storedTitle.includes('title')) {
-                storeTitleArray.push(storedTitle)
+                storeTitleArray.push(storedTitle);
                 
                 
             }
@@ -131,20 +132,46 @@ export default function projectsPage () {
 
         for (let i=0;i<localStorage.length;i++) {
             
-            const newProject = localStorage.key(i) + ' = ' + localStorage.getItem(localStorage.key(i));
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(localStorage.key(i));
             
-
             if (storeProjectsArray.length <= i) {
                 
-                storeProjectsArray.push(newProject)
+                storeProjectsArray.push({key, value })
+                
                 
 
             };
         }
     })();
-
     //Populates the projects cards that have been previously created 
+
+    //Pushes each item of the storeProjectsArray to the right array in the right order so they can be grouped properly 
+   const titleArray = [];
+   const descriptionArray = [];
+   const dueDateArray = [];
+   
+   (function updateInfoArrays (){
+
+        let a = 0;
+        let b = 0;
+        let c = 0;
+
+    storeProjectsArray.forEach(obj=>{
+
+        if (obj.key.includes(`title`)) {
+            titleArray.push(obj);
+        }
+        else if (obj.key.includes('description')) {
+            descriptionArray.push(obj);
+        }
+        else {
+            dueDateArray.push(obj)
+        }
+    });
     
+
+   })();
    
   
   
