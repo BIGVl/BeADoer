@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import deleteB from './Img/trash.png';
 
 
+const storeTitleArray = [];
 
 
 //Creates the UI for projects with the 'Projects button is pressed
@@ -15,7 +16,6 @@ export default function projectsPage () {
     projects.appendChild(addCard).classList.add('addCard');
     content.appendChild(projects).classList.add('projects-content');
     let storeProjectsArray = [];
-    const storeTitleArray = [];
 
 
 //Displays the modal in which the user can create a new project setting a title and a description
@@ -54,10 +54,13 @@ export default function projectsPage () {
 
         function submitProjectCard() {
             let i = storeTitleArray.length;
+
+            while (localStorage.getItem(`title${i}`)) {
+                i++;
+            }
+
                 let overMax = document.createElement('div');
-    
                 if (projectName.value === '') return;
-                if (description.value === '') return;
                 if (projectName.value.length > 16) {
     
                     overMax.textContent = 'The maximum length for the title is 15 characters!';
@@ -66,8 +69,11 @@ export default function projectsPage () {
                     return
                 }
                 else if (projectName.value.length < 16 && project.contains(overMax) ) 
-                {
+                {   
                     projectName.removeChild(overMax);}
+                if (description.value.length >= 144) return;
+
+                
     
                 projects.removeChild(addCard);
                 const newProjectCard = document.createElement('div');
@@ -88,17 +94,17 @@ export default function projectsPage () {
                 const deleteProject = document.createElement('img');
                 deleteProject.setAttribute('class', 'deleteB');
                 deleteProject.setAttribute('src', deleteB);
+                deleteProject.setAttribute('data-del', i);
+
                 
                 deleteProject.addEventListener('click', ()=>{
                     
                     projects.removeChild(newProjectCard);
                     localStorage.removeItem(`title${i}`);
                     localStorage.removeItem(`description${i}`);
-
-                    if (localStorage.getItem(`dueDate${i}`)) {
                     localStorage.removeItem(`dueDate${i}`);
-                    }
-                    storeTitleArray.splice(i,1)
+                    
+                    
                 })
 
                 headerNew.appendChild(title).classList.add('new-title');
@@ -121,7 +127,9 @@ export default function projectsPage () {
             //Store the projects in the array and in the local storage
                 localStorage.setItem(`title${i}`, projectName.value );
                 localStorage.setItem(`description${i}`, description.value);
+                localStorage.setItem(`dueDate${i}`, dueDate.value)
                 storeTitleArray.push(`title${i}`)
+                console.log(storeTitleArray)
                 
 
                 
@@ -129,19 +137,8 @@ export default function projectsPage () {
        
         
     }
-    //Updates the storeTitleArray, so everytime the user exits or refreshes the page and then creates another project it will have the proper index
-    (function updateTitleArray () {
 
-        for (let i=0;i<localStorage.length;i++) {
-            const storedTitle = localStorage.key(i);
-            if( storedTitle.includes('title')) {
-                storeTitleArray.push(storedTitle);
-                
-                
-            }
-        }
-    })();
-   
+
 
   
     //Updates the storeProjectsArray everytime the user opens the projects tab
@@ -183,7 +180,7 @@ export default function projectsPage () {
         }
     });
   
-//Sort the arrya with the information so it will give the proper information to each project card when looping through the arrays and their keys and values
+//Sort the array with the information so it will give the proper information to each project card when looping through the arrays and their keys and values
     titleArray.sort(sortKeys);
     descriptionArray.sort(sortKeys);
     dueDateArray.sort(sortKeys);
@@ -201,9 +198,67 @@ export default function projectsPage () {
     }
  
    })();
-   
-  
-  
-}
+//Creates the cards for each project previously created and stored in local storage
 
+   (function createCard () {
+
+    projects.removeChild(addCard);
+    for (let i=0;i<titleArray.length;i++) {
+
+        
+                const newProjectCard = document.createElement('div');
+                const title = document.createElement('div');
+                const dateDiv = document.createElement('div');
+                const dueDate = document.createElement('input');
+                const dueDateLabel = document.createElement('label');
+                const headerNew = document.createElement('div');
+                const descriptionNew =  document.createElement('div');
+                const openProject = document.createElement('button');
+                const deleteProject = document.createElement('img');
+
+            
+                title.textContent = titleArray[i].value;
+                dueDate.value = dueDateArray[i].value;
+                descriptionNew.textContent = descriptionArray[i].value;
+                dueDate.setAttribute('type', 'date');
+                dueDate.setAttribute('id', 'dueDate');               
+                dueDateLabel.setAttribute('for','dueDate');
+                dueDateLabel.textContent = 'Due date:';
+                openProject.textContent = 'Open';
+                deleteProject.setAttribute('class', 'deleteB');
+                deleteProject.setAttribute('src', deleteB);
+                
+                
+                deleteProject.addEventListener('click', ()=>{
+                    
+                    projects.removeChild(newProjectCard);
+                    localStorage.removeItem(titleArray[i].key);
+                    localStorage.removeItem(descriptionArray[i].key);
+                    localStorage.removeItem(dueDateArray[i].key);
+
+                    
+                })
+
+                dueDate.addEventListener('change', ()=>{
+
+                    localStorage.setItem(dueDateArray[i].key , dueDate.value)
+                })
+
+                headerNew.appendChild(title).classList.add('new-title');
+                dateDiv.appendChild(dueDateLabel).classList.add('due-date-label');
+                dateDiv.appendChild(dueDate).classList.add('new-due-date');
+                headerNew.appendChild(dateDiv).classList.add('date-div');
+                newProjectCard.appendChild(headerNew).classList.add('new-header')
+                newProjectCard.appendChild(descriptionNew).classList.add('new-description');
+                newProjectCard.appendChild(openProject).classList.add('open-project');
+                newProjectCard.appendChild(deleteProject);
+                projects.appendChild(newProjectCard).classList.add('new-project-card');
+        
+
+        
+    }
+    projects.appendChild(addCard); 
+   })();
+   
+}
 
