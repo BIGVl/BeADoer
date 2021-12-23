@@ -399,6 +399,11 @@
 
 }
 
+.add-task:hover {
+
+    background: #78E9CC;
+}
+
 .project-notes {
     color: white;
     font-family: 'Roboto Mono', monospace;
@@ -413,6 +418,11 @@
 
 
 
+}
+
+.project-notes:hover {
+
+    background: #78E9CC;
 }
 
 .project-more:hover {
@@ -432,8 +442,17 @@
     color: white;
     margin-right: 10px;
     margin-bottom: 20px;
+    display: grid;
+    justify-content: center;
 
     
+}
+
+.due::after {
+    content: '';
+    background: white;
+    width: 100%;
+    height: 2px;
 }
 
 ::-webkit-scrollbar {

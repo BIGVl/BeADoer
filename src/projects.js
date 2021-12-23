@@ -330,7 +330,10 @@ function openingProject (title, dueDate) {
         projects.removeChild(project);
     })
 
-    
+    addTask.addEventListener('click', ()=>{
+
+        
+    })
     
 
 };
