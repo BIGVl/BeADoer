@@ -7,7 +7,7 @@ import everyday from './everyday.js';
 import notes from './notes.js'
 import projects from './projects.js'
 
-window.onload = everyday();
+window.onload = projects();
 
 //Adding functionality to the buttons to delete the current content and populate with the right content for the button
 

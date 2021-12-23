@@ -1,5 +1,8 @@
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import deleteB from './Img/trash.png';
+import goback from './Img/back.png';
+import moreIMG from './Img/more.png';
+
 
 
 const storeTitleArray = [];
@@ -79,7 +82,9 @@ export default function projectsPage () {
                 else if (projectName.value.length < 16 && projectCard.contains(overMax) ) 
                 {   
                     projectName.removeChild(overMax);}
-                if (description.value.length >= 144) return;
+                if (description.value.length >= 144) {
+                    overMax.textContent = 'Maximum length for the description is 144 characters'
+                    return;}
 
                 
     
@@ -103,8 +108,11 @@ export default function projectsPage () {
                 deleteProject.setAttribute('class', 'deleteB');
                 deleteProject.setAttribute('src', deleteB);
                 deleteProject.setAttribute('data-del', i);
+                
 
-                openProject.addEventListener('click', openingProject(title.textContent))
+                
+
+                openProject.addEventListener('click', function(){openingProject(title.textContent, '')})
 
                 
                 deleteProject.addEventListener('click', ()=>{
@@ -238,7 +246,6 @@ export default function projectsPage () {
                 openProject.textContent = 'Open';
                 deleteProject.setAttribute('class', 'deleteB');
                 deleteProject.setAttribute('src', deleteB);
-                
                 openProject.addEventListener('click', function(){openingProject(title.textContent, dueDate.value)})
 
 
@@ -282,31 +289,52 @@ function openingProject (title, dueDate) {
     const header = document.createElement('header');
     const back = document.createElement('img');
     const projectName = document.createElement('div');
+    const rightButtons = document.createElement('div');
     const addTask = document.createElement('button');
     const notes = document.createElement('button');
     const more = document.createElement('img');
     const todos = document.createElement('div');
     const due = document.createElement('div');
     
-
     projectName.textContent = title;
-    due.textContent = formatDistanceToNow(new Date(dueDate), {addSuffix: true});
+    back.setAttribute('src', goback);
+    more.setAttribute('src', moreIMG)
+    addTask.textContent = 'Add Task';
+    notes.textContent = 'Notes';
+
+    
+
+  
+    
+    if (dueDate === '') { due.textContent = 'Due date not set'}
+    else {
+    due.textContent = 'Due: ' + formatDistanceToNow(new Date(dueDate), {addSuffix: true});
+    }
+    
     
 
     header.appendChild(back).classList.add('back-from-project');
     header.appendChild(projectName).classList.add('named-project');
-    header.appendChild(addTask).classList.add('add-task');
-    header.appendChild(notes).classList.add('project-notes');
-    header.appendChild(more).classList.add('project-more');
+    rightButtons.appendChild(addTask).classList.add('add-task');
+    rightButtons.appendChild(notes).classList.add('project-notes');
+    rightButtons.appendChild(more).classList.add('project-more');
+    header.appendChild(rightButtons).classList.add('right-buttons')
     project.appendChild(header).classList.add('project-header');
     project.appendChild(todos).classList.add('todos');
     project.appendChild(due).classList.add('due');
     projects.appendChild(project).classList.add('project');
 
+
+    back.addEventListener('click', ()=>{
+
+        projects.removeChild(project);
+    })
+
     
     
 
 };
+
 
 }
 

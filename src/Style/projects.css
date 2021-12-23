@@ -59,11 +59,16 @@
 
 .addButton:hover  {
     
-    animation: rotate 1s forwards ;
+    animation: rotate 1.3s forwards ;
 
 }
 
 @keyframes rotate {
+
+    5% {
+
+        transform: rotate(0deg);
+    }
 
     50% {
         transform: rotate(180deg);
@@ -80,7 +85,7 @@
 }
 
 .addButton:hover::before, .addButton:hover::after {
-    height: 80%;
+    height: 68%;
 }
 
 .addButton:active::before, .addButton:active::after {
@@ -89,7 +94,7 @@
 
 .project-modal {
 
-    background: #00A5CF;
+    background: #5ACDC0;
     position: fixed;
     z-index: 20;
     width: 60vw ;
@@ -195,7 +200,7 @@
 
 .submit:hover {
 
-    background: #9FFFCB;
+    background: #78E9CC;
 }
 
 
@@ -311,11 +316,11 @@
 
 .project {
 
-    position: fixed;
     top: 5%;
     left: 5%;
     bottom: 5%;
     right: 5%;
+    position: fixed;
     background: rgba(0,0,0, 0.5);
     box-shadow: -15px 15px 25px rgba(0,0,0,.7);
     overflow: hidden;
@@ -325,13 +330,110 @@
     grid-template-columns: 90% 10%;
     overflow-y: scroll;
     border-radius: 10px;
+    font-family:'Roboto Mono', monospace;
+    /*animation: grow 0.2s linear 0s ;*/
+
+
 }
+
+/*@keyframes grow {
+    
+    0% {
+    bottom: 5%;
+    right: 40%;
+    left: 40%;
+    top: 80%;
+    
+
+    }
+}*/
+
+
 
 .project-header {
     grid-column-start: 1;
     grid-column-end: 3;
     height: 15%;
     background: rgba(256,256,256,0.6);
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.back-from-project:hover {
+
+    background: rgba(256,256,256,1);
+}
+
+
+
+
+.named-project {
+
+    font-size: 2.9em;
+    margin-left: -25%;
+
+}
+
+.right-buttons {
+    
+    display: flex;
+    justify-content: space-between;
+    width: 22%;
+}
+
+
+.add-task {
+
+    font-family: 'Roboto Mono', monospace;
+    width: 7em;
+    height: 70%;
+    align-self: center;
+    border: none;
+    background: #004E64;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+
+.project-notes {
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    width: 5.5em;
+    height: 70%;
+    align-self: center;
+    border: none;
+    background: #004E64;
+    border-radius: 10px;
+    cursor: pointer;
+
+
+
+
+}
+
+.project-more:hover {
+
+    cursor: pointer;
+    background: white;
+    
+}
+
+.due {
+
+
+    height: 10%;
+    align-self: end;
+    grid-column-start: -2;
+    grid-column-end: -1;
+    color: white;
+    margin-right: 10px;
+    margin-bottom: 20px;
+
+    
 }
 
 ::-webkit-scrollbar {
@@ -353,3 +455,4 @@
     border-radius: 10px;
     background: #9FFFCB;
 }
+
