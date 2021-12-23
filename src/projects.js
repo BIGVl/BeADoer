@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import deleteB from './Img/trash.png';
 
 
@@ -22,13 +22,15 @@ export default function projectsPage () {
     addButton.addEventListener('click', addProjectCard)
 
     function addProjectCard () {
-        const project = document.createElement('div');
+        const projectCard = document.createElement('div');
         const projectName = document.createElement('input');
         projectName.setAttribute('id','project-name');
         projectName.setAttribute('type','text');
         const label = document.createElement('label');
         label.setAttribute('for','project-name');
         label.textContent = 'Add your project\'s name:';
+        const closeModal = document.createElement('button');
+        projectCard.appendChild(closeModal).classList.add('close-modal');
         const description = document.createElement('input');
         description.setAttribute('placeholder','Describe your project. Like what is trying to achieve?');
         description.setAttribute('id','description')
@@ -37,17 +39,23 @@ export default function projectsPage () {
         labelDescription.textContent = 'Description'
         const submit = document.createElement('button');
         submit.textContent = 'Submit';
-        project.appendChild(label).classList.add('project-label');
-        project.appendChild(projectName).classList.add('project-name');
-        project.appendChild(labelDescription).classList.add('label-description')
-        project.appendChild(description).classList.add('project-description');
-        project.appendChild(submit).classList.add('submit');
-        project.classList.add('project-modal');
-        projects.appendChild(project);
+        projectCard.appendChild(label).classList.add('project-label');
+        projectCard.appendChild(projectName).classList.add('project-name');
+        projectCard.appendChild(labelDescription).classList.add('label-description')
+        projectCard.appendChild(description).classList.add('project-description');
+        projectCard.appendChild(submit).classList.add('submit');
+        projectCard.classList.add('project-modal');
+        projects.appendChild(projectCard);
         const inputs = document.querySelectorAll('input');
         inputs.forEach(input=>{
             input.setAttribute('autocomplete', 'off');
         });
+
+        closeModal.addEventListener('click', ()=>{
+
+            projects.removeChild(projectCard);
+        })
+        
 
 //Adds the project's card when the user clicks submit on the modal that creates the project, adds a input date so the user can set if he wishes to, a dueDate
         submit.addEventListener('click',submitProjectCard)
@@ -65,10 +73,10 @@ export default function projectsPage () {
     
                     overMax.textContent = 'The maximum length for the title is 15 characters!';
                     overMax.style.cssText = 'color: red';
-                    project.appendChild(overMax).classList.add('over-max');
+                    projectCard.appendChild(overMax).classList.add('over-max');
                     return
                 }
-                else if (projectName.value.length < 16 && project.contains(overMax) ) 
+                else if (projectName.value.length < 16 && projectCard.contains(overMax) ) 
                 {   
                     projectName.removeChild(overMax);}
                 if (description.value.length >= 144) return;
@@ -96,6 +104,8 @@ export default function projectsPage () {
                 deleteProject.setAttribute('src', deleteB);
                 deleteProject.setAttribute('data-del', i);
 
+                openProject.addEventListener('click', openingProject(title.textContent))
+
                 
                 deleteProject.addEventListener('click', ()=>{
                     
@@ -117,11 +127,12 @@ export default function projectsPage () {
                 newProjectCard.appendChild(deleteProject);
                 projects.appendChild(newProjectCard).classList.add('new-project-card');
                 projects.appendChild(addCard).classList.add('addButon');
-                projects.removeChild(project);
+                projects.removeChild(projectCard);
 
                 dueDate.addEventListener('change', ()=>{
 
                     localStorage.setItem(`dueDate${i}`, dueDate.value)
+                    
                 })
     
             //Store the projects in the array and in the local storage
@@ -129,7 +140,7 @@ export default function projectsPage () {
                 localStorage.setItem(`description${i}`, description.value);
                 localStorage.setItem(`dueDate${i}`, dueDate.value)
                 storeTitleArray.push(`title${i}`)
-                console.log(storeTitleArray)
+                
                 
 
                 
@@ -228,7 +239,9 @@ export default function projectsPage () {
                 deleteProject.setAttribute('class', 'deleteB');
                 deleteProject.setAttribute('src', deleteB);
                 
-                
+                openProject.addEventListener('click', function(){openingProject(title.textContent, dueDate.value)})
+
+
                 deleteProject.addEventListener('click', ()=>{
                     
                     projects.removeChild(newProjectCard);
@@ -260,5 +273,40 @@ export default function projectsPage () {
     projects.appendChild(addCard); 
    })();
    
+//Opens the project of which the Open button is clicked
+
+function openingProject (title, dueDate) {
+
+    
+    const project = document.createElement('div');
+    const header = document.createElement('header');
+    const back = document.createElement('img');
+    const projectName = document.createElement('div');
+    const addTask = document.createElement('button');
+    const notes = document.createElement('button');
+    const more = document.createElement('img');
+    const todos = document.createElement('div');
+    const due = document.createElement('div');
+    
+
+    projectName.textContent = title;
+    due.textContent = formatDistanceToNow(new Date(dueDate), {addSuffix: true});
+    
+
+    header.appendChild(back).classList.add('back-from-project');
+    header.appendChild(projectName).classList.add('named-project');
+    header.appendChild(addTask).classList.add('add-task');
+    header.appendChild(notes).classList.add('project-notes');
+    header.appendChild(more).classList.add('project-more');
+    project.appendChild(header).classList.add('project-header');
+    project.appendChild(todos).classList.add('todos');
+    project.appendChild(due).classList.add('due');
+    projects.appendChild(project).classList.add('project');
+
+    
+    
+
+};
+
 }
 

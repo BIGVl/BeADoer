@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 2.5rem 2.5rem auto;
     border: 5px groove #25A18E;
-    box-shadow: 3px 3px 3px 1px gray;
+    box-shadow: 3px 3px 15px 5px rgba(0,0,0,0.7);
 }
 
 .hours {
@@ -21,7 +21,7 @@
 .row {
     font-family:'Roboto Mono', monospace;
     font-size: 1rem;
-    background: #9FFFCB;
+    background: #78E9CC;
     border: none;
     border-bottom: 1px solid black;
 }
