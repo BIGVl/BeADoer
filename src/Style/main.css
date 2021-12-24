@@ -78,3 +78,14 @@ body {
     
 }
 
+input[type=text] {
+
+    outline: #25A18E;
+}
+
+input[type=text]:focus {
+
+    outline: #25A18E;
+    outline-width: 3px;
+
+}

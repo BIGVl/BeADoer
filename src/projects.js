@@ -36,7 +36,8 @@ export default function projectsPage () {
         projectCard.appendChild(closeModal).classList.add('close-modal');
         const description = document.createElement('input');
         description.setAttribute('placeholder','Describe your project. Like what is trying to achieve?');
-        description.setAttribute('id','description')
+        description.setAttribute('id','description');
+        description.setAttribute('type', 'text');
         const labelDescription = document.createElement('label');
         labelDescription.setAttribute('for','description')
         labelDescription.textContent = 'Description'
@@ -325,12 +326,76 @@ function openingProject (title, dueDate) {
     projects.appendChild(project).classList.add('project');
 
 
+//Closes the opened project
     back.addEventListener('click', ()=>{
 
         projects.removeChild(project);
     })
 
+
+//Opens the menu that creates a new to-do 
     addTask.addEventListener('click', ()=>{
+
+        const newToDo = document.createElement('div');
+        const nameDiv =document.createElement('div');
+        const nameToDo = document.createElement('input');
+        const nameToDoLabel = document.createElement('label');
+        const descriptionDiv = document.createElement('div');
+        const descriptionToDo = document.createElement('input');
+        const descriptionToDoLabel = document.createElement('label');
+        const todoDueDiv = document.createElement('div');
+        const todoDueDate = document.createElement('input');
+        const todoDueDateLabel = document.createElement('label');
+        const priorityDiv = document.createElement('div');
+        const priority = document.createElement('div');
+        const priorityText = document.createElement('div');
+        const addSubTasks = document.createElement('button');
+
+        nameToDo.setAttribute('type', 'text');
+        nameToDo.setAttribute('placeholder', ' ');
+        nameToDoLabel.textContent = 'To-Do';
+        descriptionToDo.setAttribute('type', 'text');
+        descriptionToDo.setAttribute('placeholder', ' ');
+        descriptionToDoLabel.textContent = 'Description';
+        todoDueDate.setAttribute('type', 'datetime-local');
+        todoDueDate.setAttribute('id','to-do-due');
+        todoDueDateLabel.setAttribute('for','to-do-due');
+        todoDueDateLabel.textContent = 'Set deadline: ';
+
+        priority.textContent = '0';
+        priorityText.textContent = 'Priority: ';
+        addSubTasks.textContent = 'Add subtasks';
+
+
+        nameDiv.appendChild(nameToDoLabel).classList.add('to-do-name-label');
+        nameDiv.appendChild(nameToDo).classList.add('to-do-name');
+        newToDo.appendChild(nameDiv).classList.add('to-do-name-div')
+        descriptionDiv.appendChild(descriptionToDoLabel).classList.add('to-do-description-label');
+        descriptionDiv.appendChild(descriptionToDo).classList.add('to-do-description');
+        newToDo.appendChild(descriptionDiv).classList.add('to-do-description-div');
+        todoDueDiv.appendChild(todoDueDateLabel).classList.add('to-do-due-label');
+        todoDueDiv.appendChild(todoDueDate).classList.add('to-do-due');
+        newToDo.appendChild(todoDueDiv).classList.add('to-do-due-div')
+        priorityDiv.appendChild(priorityText).classList.add('to-do-priority-label');
+        priorityDiv.appendChild(priority).classList.add('to-do-priority')
+        newToDo.appendChild(priorityDiv).classList.add('to-do-priority-div');
+        newToDo.appendChild(addSubTasks).classList.add('to-do-add-subtasks');
+        todos.appendChild(newToDo).classList.add('to-do-new');
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         
     })
@@ -338,6 +403,17 @@ function openingProject (title, dueDate) {
 
 };
 
+//To-do factory 
+
+const todoFactory = (todoName, todoDescription, todoDue, todoPrority) => {
+
+    this.todoName = todoName;
+    this.todoDescription = todoDescription;
+    this.todoDue = todoDue;
+    this.todoPrority = todoPrority;
+
+    return {todoName,todoDescription,todoDue,todoPrority}
+}
 
 }
 
