@@ -1,1 +1,3 @@
 A to-do application made for the TOP. 
+Not finished yet but you can check it out at: https://bigvl.github.io/BeADoer/
+Work in progress...
