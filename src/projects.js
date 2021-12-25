@@ -383,7 +383,7 @@ function openingProject (title, dueDate) {
         newToDo.appendChild(todoDueDiv).classList.add('to-do-due-div')
         priorityDiv.appendChild(priorityText).classList.add('to-do-priority-label');
         priorityDropDown.appendChild(priority).classList.add('to-do-priority');
-        priorityDiv.appendChild(priorityDropDown).classList.add('priority-dropdown')
+        priorityDiv.appendChild(priorityDropDown).classList.add('priority-dropdown');
         newToDo.appendChild(priorityDiv).classList.add('to-do-priority-div');
         newToDo.appendChild(addSubTasks).classList.add('to-do-add-subtasks');
         newToDo.appendChild(confirmToDo).classList.add('to-do-confirm');
