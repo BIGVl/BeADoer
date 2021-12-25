@@ -592,6 +592,42 @@
 
 .to-do-priority-div {
     grid-column-start: 2;
+    display: flex;
+    gap: .7rem;
+    margin-left: 30px;
+    
+}
+
+.to-do-priority {
+
+    background: red;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+}
+
+.priority-dropdown {
+
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    
+}
+
+.priority-dropdown::after{
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #5ACDC0 ;
+    position: absolute;
+    right: 9%;
+    cursor: pointer;
 }
 
 .to-do-due-div {
@@ -612,6 +648,23 @@
     border-radius: 25px;
     border: none;
 }
+
+.to-do-due {
+
+    border-radius: 15px;
+    padding-left: 10px;
+    border: none;
+    background: #002D38;
+    color: white;
+    padding-right: 5px;
+
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+
 
 .to-do-confirm:hover {
     background: #002D38 ;

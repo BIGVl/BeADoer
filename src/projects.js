@@ -353,6 +353,7 @@ function openingProject (title, dueDate) {
         const priorityText = document.createElement('div');
         const addSubTasks = document.createElement('button');
         const confirmToDo = document.createElement('button');
+        const priorityDropDown = document.createElement('div')
 
 
         nameToDo.setAttribute('type', 'text');
@@ -366,9 +367,8 @@ function openingProject (title, dueDate) {
         todoDueDateLabel.setAttribute('for','to-do-due');
         todoDueDateLabel.textContent = 'Set deadline: ';
         confirmToDo.textContent = 'Confirm';
-
         priority.textContent = '0';
-        priorityText.textContent = 'Priority: ';
+        priorityText.textContent = 'Set priority: ';
         addSubTasks.textContent = 'Add subtasks';
 
         
@@ -382,7 +382,8 @@ function openingProject (title, dueDate) {
         todoDueDiv.appendChild(todoDueDate).classList.add('to-do-due');
         newToDo.appendChild(todoDueDiv).classList.add('to-do-due-div')
         priorityDiv.appendChild(priorityText).classList.add('to-do-priority-label');
-        priorityDiv.appendChild(priority).classList.add('to-do-priority')
+        priorityDropDown.appendChild(priority).classList.add('to-do-priority');
+        priorityDiv.appendChild(priorityDropDown).classList.add('priority-dropdown')
         newToDo.appendChild(priorityDiv).classList.add('to-do-priority-div');
         newToDo.appendChild(addSubTasks).classList.add('to-do-add-subtasks');
         newToDo.appendChild(confirmToDo).classList.add('to-do-confirm');
