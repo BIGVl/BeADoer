@@ -84,7 +84,7 @@ export default function projectsPage () {
                 {   
                     projectName.removeChild(overMax);}
                 if (description.value.length >= 144) {
-                    overMax.textContent = 'Maximum length for the description is 144 characters'
+                    overMax.textContent = 'Maximum length for the description is 144 characters';
                     return;}
 
                 
@@ -113,7 +113,7 @@ export default function projectsPage () {
 
                 
 
-                openProject.addEventListener('click', function(){openingProject(title.textContent, '')})
+                
 
                 
                 deleteProject.addEventListener('click', ()=>{
@@ -143,6 +143,8 @@ export default function projectsPage () {
                     localStorage.setItem(`dueDate${i}`, dueDate.value)
                     
                 })
+
+                openProject.addEventListener('click', function(){openingProject(title.textContent, dueDate.value)})
     
             //Store the projects in the array and in the local storage
                 localStorage.setItem(`title${i}`, projectName.value );
@@ -350,10 +352,12 @@ function openingProject (title, dueDate) {
         const priority = document.createElement('div');
         const priorityText = document.createElement('div');
         const addSubTasks = document.createElement('button');
+        const confirmToDo = document.createElement('button');
+
 
         nameToDo.setAttribute('type', 'text');
         nameToDo.setAttribute('placeholder', ' ');
-        nameToDoLabel.textContent = 'To-Do';
+        nameToDoLabel.textContent = 'To-do';
         descriptionToDo.setAttribute('type', 'text');
         descriptionToDo.setAttribute('placeholder', ' ');
         descriptionToDoLabel.textContent = 'Description';
@@ -361,17 +365,18 @@ function openingProject (title, dueDate) {
         todoDueDate.setAttribute('id','to-do-due');
         todoDueDateLabel.setAttribute('for','to-do-due');
         todoDueDateLabel.textContent = 'Set deadline: ';
+        confirmToDo.textContent = 'Confirm';
 
         priority.textContent = '0';
         priorityText.textContent = 'Priority: ';
         addSubTasks.textContent = 'Add subtasks';
 
-
-        nameDiv.appendChild(nameToDoLabel).classList.add('to-do-name-label');
+        
         nameDiv.appendChild(nameToDo).classList.add('to-do-name');
+        nameDiv.appendChild(nameToDoLabel).classList.add('to-do-name-label');
         newToDo.appendChild(nameDiv).classList.add('to-do-name-div')
-        descriptionDiv.appendChild(descriptionToDoLabel).classList.add('to-do-description-label');
         descriptionDiv.appendChild(descriptionToDo).classList.add('to-do-description');
+        descriptionDiv.appendChild(descriptionToDoLabel).classList.add('to-do-description-label');
         newToDo.appendChild(descriptionDiv).classList.add('to-do-description-div');
         todoDueDiv.appendChild(todoDueDateLabel).classList.add('to-do-due-label');
         todoDueDiv.appendChild(todoDueDate).classList.add('to-do-due');
@@ -380,20 +385,9 @@ function openingProject (title, dueDate) {
         priorityDiv.appendChild(priority).classList.add('to-do-priority')
         newToDo.appendChild(priorityDiv).classList.add('to-do-priority-div');
         newToDo.appendChild(addSubTasks).classList.add('to-do-add-subtasks');
+        newToDo.appendChild(confirmToDo).classList.add('to-do-confirm');
         todos.appendChild(newToDo).classList.add('to-do-new');
         
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
