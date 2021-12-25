@@ -23,6 +23,8 @@ body {
     position: fixed;
     width: 100vw;
     z-index: 11;
+    right: 1%;
+    
 }
 
 .menu {
