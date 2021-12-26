@@ -355,6 +355,17 @@ function openingProject (title, dueDate) {
         const confirmToDo = document.createElement('button');
         const priorityDropDown = document.createElement('div')
 
+        const priority1 = document.createElement('div');
+        const priority2 = document.createElement('div');
+        const priority3 = document.createElement('div');
+        const priority4 = document.createElement('div');
+
+        priority1.textContent = 0; 
+        priority2.textContent = 1; 
+        priority3.textContent = 2; 
+        priority4.textContent = 3; 
+
+
 
         nameToDo.setAttribute('type', 'text');
         nameToDo.setAttribute('placeholder', ' ');
@@ -371,6 +382,8 @@ function openingProject (title, dueDate) {
         priorityText.textContent = 'Set priority: ';
         addSubTasks.textContent = 'Add subtasks';
 
+
+        
         
         nameDiv.appendChild(nameToDo).classList.add('to-do-name');
         nameDiv.appendChild(nameToDoLabel).classList.add('to-do-name-label');
@@ -380,9 +393,11 @@ function openingProject (title, dueDate) {
         newToDo.appendChild(descriptionDiv).classList.add('to-do-description-div');
         todoDueDiv.appendChild(todoDueDateLabel).classList.add('to-do-due-label');
         todoDueDiv.appendChild(todoDueDate).classList.add('to-do-due');
+        
         newToDo.appendChild(todoDueDiv).classList.add('to-do-due-div')
         priorityDiv.appendChild(priorityText).classList.add('to-do-priority-label');
         priorityDropDown.appendChild(priority).classList.add('to-do-priority');
+      
         priorityDiv.appendChild(priorityDropDown).classList.add('priority-dropdown');
         newToDo.appendChild(priorityDiv).classList.add('to-do-priority-div');
         newToDo.appendChild(addSubTasks).classList.add('to-do-add-subtasks');
@@ -390,6 +405,52 @@ function openingProject (title, dueDate) {
         todos.appendChild(newToDo).classList.add('to-do-new');
         
 
+        priorityDropDown.addEventListener('click', (e)=>{
+
+            console.log(e.target)
+
+            priority.textContent = e.target.closest('.priority-dropdown > div').textContent;
+
+            if (priority.textContent === '0') {
+                priority.style.background = 'red';
+            }
+            else if (priority.textContent === '1') {
+                priority.style.background = 'orange';
+            }
+            else if (priority.textContent === '2') {
+                priority.style.background = 'yellow';
+            }
+
+            else if (priority.textContent === '3') {
+                priority.style.background = 'green';
+            }
+
+
+
+            if(!priorityDropDown.classList.contains('active')) {
+            priorityDropDown.appendChild(priority1).classList.add('to-do-priority1');
+            priorityDropDown.appendChild(priority2).classList.add('to-do-priority2');
+            priorityDropDown.appendChild(priority3).classList.add('to-do-priority3');
+            priorityDropDown.appendChild(priority4).classList.add('to-do-priority4');
+            }
+
+            else {
+
+                priorityDropDown.removeChild(priority1).classList.add('to-do-priority1');
+            priorityDropDown.removeChild(priority2).classList.add('to-do-priority2');
+            priorityDropDown.removeChild(priority3).classList.add('to-do-priority3');
+            priorityDropDown.removeChild(priority4).classList.add('to-do-priority4')
+
+            }
+
+            
+
+            priorityDropDown.classList.toggle('active');
+
+
+            
+
+        })
 
 
         
@@ -409,6 +470,8 @@ const todoFactory = (todoName, todoDescription, todoDue, todoPrority) => {
 
     return {todoName,todoDescription,todoDue,todoPrority}
 }
+
+
 
 }
 

@@ -464,13 +464,7 @@
     grid-row-start: 2;
     display: flex;
     flex-direction: column;
-
-    gap: 25px;
-    overflow: hidden;
-    
-
-    
-
+    gap: 6rem;
 }
 
 .to-do-new {
@@ -610,15 +604,8 @@
     color: white;
 }
 
-.priority-dropdown {
+.to-do-priority::after {
 
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    
-}
-
-.priority-dropdown::after{
     content: '';
     width: 0;
     height: 0;
@@ -626,9 +613,132 @@
     border-bottom: 10px solid transparent;
     border-left: 10px solid #5ACDC0 ;
     position: absolute;
-    right: 9%;
-    cursor: pointer;
+    transform: translateX(25px);
+    transition : transform 100ms ease-in;
 }
+
+.priority-dropdown.active > .to-do-priority::after {
+
+    content: '';
+    width: 0;
+    height: 0;
+    transform: rotate(90deg) translateY(-25px);
+    position: absolute;
+    
+}
+
+.to-do-priority1 {
+    background: red;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.to-do-priority2 {
+    background: orange;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.to-do-priority3 {
+    background: yellow;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.to-do-priority4 {
+    background: green;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+
+.to-do-priority1::after {
+    position: absolute;
+    content: 'Very high';
+    left: 89%;
+    color: #002D38;
+
+}
+.to-do-priority2::after {
+    position: absolute;
+    content: 'High';
+    left: 89%;
+    color: #002D38;
+
+
+}.to-do-priority3::after {
+    position: absolute;
+    content: 'Medium';
+    left: 89%;
+    color: #002D38;
+
+
+}.to-do-priority4::after {
+    position: absolute;
+    content: 'Low';
+    left: 89%;
+    color: #002D38;
+
+}
+
+
+
+.to-do-priority1::before,
+.to-do-priority2::before,
+.to-do-priority3::before,
+.to-do-priority4::before {
+    position: absolute;
+    content: '';
+    width: 8%;
+    right: 5%;
+    height: 1px;
+    background: #002D38;
+    transform: translateY(-5px);
+}
+
+
+
+.priority-dropdown.active {
+
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    width: 10rem;
+    height: fit-content;
+    gap: 10px;
+    background: rgba(240,240,240, 1);
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
+}
+
+
+
+
+
+
 
 .to-do-due-div {
 
@@ -657,6 +767,7 @@
     background: #002D38;
     color: white;
     padding-right: 5px;
+    font-family: inherit;
 
 }
 

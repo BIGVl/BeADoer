@@ -24,6 +24,7 @@ body {
     width: 100vw;
     z-index: 11;
     right: 1%;
+    border-bottom-right-radius: 40px;
     
 }
 
