@@ -2,14 +2,17 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import deleteB from './Img/trash.png';
 import goback from './Img/back.png';
 import moreIMG from './Img/more.png';
+import { drop } from 'lodash';
 
 
 
 const storeTitleArray = [];
 
 
+
 //Creates the UI for projects with the 'Projects button is pressed
 export default function projectsPage () {
+
 //Important DOM variables and arrays
     const content = document.querySelector('.content');
     const addCard = document.createElement('div');
@@ -365,6 +368,14 @@ function openingProject (title, dueDate) {
         priority3.textContent = 2; 
         priority4.textContent = 3; 
 
+        priority.dataset.priority=1;
+        priority1.dataset.priority=2;
+        priority2.dataset.priority=3;
+        priority3.dataset.priority=4;
+        priority4.dataset.priority=5;
+
+    
+
 
 
         nameToDo.setAttribute('type', 'text');
@@ -407,7 +418,7 @@ function openingProject (title, dueDate) {
 
         priorityDropDown.addEventListener('click', (e)=>{
 
-            console.log(e.target)
+            if(!e.target.dataset.priority) return;
 
             priority.textContent = e.target.closest('.priority-dropdown > div').textContent;
 
