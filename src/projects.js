@@ -2,6 +2,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import deleteB from './Img/trash.png';
 import goback from './Img/back.png';
 import moreIMG from './Img/more.png';
+import { parseISO } from 'date-fns';
 
 
 
@@ -571,11 +572,55 @@ function confirmingAddToDo () {
 }
 
 //Creates a new to-do with the information taken from the window in which the user has added info 
-function createTODO () {
+const createTODO =  () => {
 
-    const todoName = document.createElement('div');
-    const todoDescription = document.createElement('div')
+    const theTODO = document.createElement('div');
+    const theName = document.createElement('div');
+    const theDescription = document.createElement('div');
+    const theDue = document.createElement('div');
+ 
+
+    theName.textContent = nameToDo.value;
+    theDescription.textContent = descriptionToDo.value;
+
+    if (todoDueDate.value === '') {
+        theDue.textContent = 'Due not set';
+    }
+    else {
+    theDue.textContent = formatDistanceToNow(parseISO(todoDueDate.value),{addSuffix: true});
+    }
+
+    ;
+
+    if (priority.textContent === '0') {
+
+        theTODO.style.cssText = 'background: red;';
+    }
+    else if (priority.textContent === '1') {
+        theTODO.style.cssText = 'background: orange;';
+    }
+    else if (priority.textContent === '2') {
+        theTODO.style.cssText = 'background: yellow;';
+    }
+    else if (priority.textContent === '3') {
+        theTODO.style.background = 'green;';
+    }
+     
+    theTODO.appendChild(theName).classList.add('the-name');
+    theTODO.appendChild(theDescription).classList.add('the-description');
+    theTODO.appendChild(theDue).classList.add('the-due');
+    todos.appendChild(theTODO).classList.add('the-to-do')
+
+
+
+
 }
+//Creates all the to-do-lists
+
+const renderAllTodos = () =>{
+    
+}
+
 
 
 }
