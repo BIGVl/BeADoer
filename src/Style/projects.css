@@ -565,24 +565,7 @@
 
 }
 
-.to-do-add-subtasks {
-    grid-column-start: 1;
-    grid-row-start: 3;
-    width: 15%;
-    height: 60%;
-    font-family: inherit;
-    border-radius: 25px;
-    border: none;
-    background: #5ACDC0 ;
-    justify-self: center;
-    color: white;
-    cursor: pointer;
-}
 
-.to-do-add-subtasks:hover {
-
-    background: #7cefe2;
-}
 
 .to-do-priority-div {
     grid-column-start: 2;
@@ -615,6 +598,7 @@
     border-left: 10px solid #5ACDC0 ;
     position: absolute;
     transform: translateX(25px);
+    transition: transform 50ms ease-in;
 }
 
 .priority-dropdown.active > .to-do-priority::after {
@@ -675,8 +659,11 @@
 .to-do-priority1::after {
     position: absolute;
     content: 'Very high';
+    width: 6.1rem;
     left: 89%;
     color: #002D38;
+    height: 1.9rem;
+
 
 }
 .to-do-priority2::after {
@@ -684,6 +671,8 @@
     content: 'High';
     left: 89%;
     color: #002D38;
+    width: 6.1rem;
+    height: 1.9rem;
 
 
 }.to-do-priority3::after {
@@ -691,6 +680,9 @@
     content: 'Medium';
     left: 89%;
     color: #002D38;
+    width: 6.1rem;
+    height: 1.9rem;
+
 
 
 }.to-do-priority4::after {
@@ -698,6 +690,8 @@
     content: 'Low';
     left: 89%;
     color: #002D38;
+    width: 6.1rem;
+    height: 1.9rem;
 
 }
 
@@ -731,14 +725,9 @@
     padding-left: 10px;
     padding-bottom: 10px;
     padding-top: 10px;
+    z-index: 5;
     
 }
-
-
-
-
-
-
 
 .to-do-due-div {
 
@@ -747,9 +736,29 @@
     margin-top: 10px;
 }
 
+.close-to-do {
+
+    width: 4%;
+    height: 60%;
+    background: red;
+    font-family: inherit;
+    justify-self: start;
+    align-self:center;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+
+}
+
+.close-to-do:hover {
+
+    background: #f00000;
+}
+
 .to-do-confirm {
     
-    width: 50%;
+    grid-column-start: 2;
+    width: 60%;
     height: 70%;
     margin-bottom: 5px;
     background: #004E64;
