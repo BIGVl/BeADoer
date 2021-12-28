@@ -2,45 +2,14 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import deleteB from './Img/trash.png';
 import goback from './Img/back.png';
 import moreIMG from './Img/more.png';
+import closeIMG from './Img/close.png'
+import flagCircle from './Img/flag-circle.png';
 import { parseISO } from 'date-fns';
 
 
 
 //Stores the titles of the projects created so it can give the right index to each one of them
 const storeTitleArray = [];
-
-//Update the arrays that keep and store the values of the newly created to-do's
-const toDoNameArray = [];
-const toDoDescriptionArray = [];
-const toDoDueArray = [];
-const toDoPriorityArray = [];
-
-const storedNamesArray =  (JSON.parse(localStorage.getItem('TODO_NAMES')));
-const storedDescsArray = (JSON.parse(localStorage.getItem('TODO_DESCS')));
-const storedDueArray = (JSON.parse(localStorage.getItem('TODO_DUES')));
-const storedPriorityArray = (JSON.parse(localStorage.getItem('TODO_PRIORITIES')));
-
-if(storedNamesArray != null) {
-storedNamesArray.forEach(name=>{
-    toDoNameArray.push(name);
-});
-
-storedDescsArray.forEach(desc=>{
-    toDoDescriptionArray.push(desc);
-});
-
-storedDueArray.forEach(due=>{
-
-    toDoDueArray.push(due);
-});
-
-storedPriorityArray.forEach(priority=>{
-
-    toDoPriorityArray.push(priority)
-})
-}
-
-
 
 //Creates the UI for projects with the 'Projects button is pressed
 export default function projectsPage () {
@@ -58,6 +27,7 @@ export default function projectsPage () {
     projects.appendChild(addCard).classList.add('addCard');
     content.appendChild(projects).classList.add('projects-content');
     let storeProjectsArray = [];
+    
 
 
 //Displays the modal in which the user can create a new project setting a title and a description
@@ -324,13 +294,15 @@ export default function projectsPage () {
    
 //Opens the project of which the Open button is clicked
 let todos;
+let projectName;
+
 function openingProject (title, dueDate) {
 
     
     const project = document.createElement('div');
     const header = document.createElement('header');
     const back = document.createElement('img');
-    const projectName = document.createElement('div');
+    projectName = document.createElement('div');
     const rightButtons = document.createElement('div');
     const addTask = document.createElement('button');
     const notes = document.createElement('button');
@@ -422,7 +394,7 @@ function addingTasks () {
          priorityText = document.createElement('div');
          confirmToDo = document.createElement('button');
          priorityDropDown = document.createElement('div')
-         closeB = document.createElement('button');
+         closeB = document.createElement('img');
          priority1 = document.createElement('div');
          priority2 = document.createElement('div');
          priority3 = document.createElement('div');
@@ -454,7 +426,7 @@ function addingTasks () {
         confirmToDo.textContent = 'Confirm';
         priority.textContent = '0';
         priorityText.textContent = 'Set priority: ';
-        closeB.textContent = 'Close'
+        closeB.setAttribute('src', closeIMG);
 
 
         
@@ -538,6 +510,8 @@ function openDropDown (e) {
 
 //Stores the new to-do information 
 
+
+const storeTodos = {};
 function confirmingAddToDo () {
 
 
@@ -551,19 +525,16 @@ function confirmingAddToDo () {
         
         return;}
 
-       
+        
+
+       storeTodos.newProject = [{'name':nameToDo.value, 'description':descriptionToDo.value, 'dueDate':todoDueDate.value, 'priority':priority.textContent}]
+       console.log(storeTodos);
 
 
-    toDoNameArray.push(nameToDo.value);
-    toDoDescriptionArray.push(descriptionToDo.value);
-    toDoDueArray.push(todoDueDate.value);
-    toDoPriorityArray.push(priority.textContent);
+    
+        
 
-
-    localStorage.setItem('TODO_NAMES', JSON.stringify(toDoNameArray))
-    localStorage.setItem('TODO_DESCS', JSON.stringify(toDoDescriptionArray))
-    localStorage.setItem('TODO_DUES', JSON.stringify(toDoDueArray))
-    localStorage.setItem('TODO_PRIORITIES', JSON.stringify(toDoPriorityArray))
+  
 
     todos.removeChild(newToDo);
 
@@ -578,10 +549,14 @@ const createTODO =  () => {
     const theName = document.createElement('div');
     const theDescription = document.createElement('div');
     const theDue = document.createElement('div');
+    const flag = document.createElement('img');
+
  
 
     theName.textContent = nameToDo.value;
     theDescription.textContent = descriptionToDo.value;
+    flag.setAttribute('src',flagCircle);
+
 
     if (todoDueDate.value === '') {
         theDue.textContent = 'Due not set';
@@ -594,21 +569,22 @@ const createTODO =  () => {
 
     if (priority.textContent === '0') {
 
-        theTODO.style.cssText = 'background: red;';
+        flag.style.cssText = 'filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);';
     }
     else if (priority.textContent === '1') {
-        theTODO.style.cssText = 'background: orange;';
+        flag.style.cssText = 'filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);';
     }
     else if (priority.textContent === '2') {
-        theTODO.style.cssText = 'background: yellow;';
+        flag.style.cssText = 'filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);';
     }
     else if (priority.textContent === '3') {
-        theTODO.style.background = 'green;';
+        flag.style.cssText = 'filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);';
     }
      
     theTODO.appendChild(theName).classList.add('the-name');
-    theTODO.appendChild(theDescription).classList.add('the-description');
     theTODO.appendChild(theDue).classList.add('the-due');
+    theTODO.appendChild(theDescription).classList.add('the-description');
+    theTODO.appendChild(flag).classList.add('flag');
     todos.appendChild(theTODO).classList.add('the-to-do')
 
 
@@ -617,9 +593,10 @@ const createTODO =  () => {
 }
 //Creates all the to-do-lists
 
-const renderAllTodos = () =>{
-    
-}
+(function renderTodos () {
+
+
+})()
 
 
 
