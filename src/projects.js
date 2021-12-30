@@ -9,13 +9,13 @@ import { parseISO } from 'date-fns';
 
 
 //Stores the titles of the projects created so it can give the right index to each one of them
-const storeTitleArray = [];
+
+
 
 //Creates the UI for projects with the 'Projects button is pressed
 export default function projectsPage () {
 
-
-
+ 
 
 
 //Important DOM variables and arrays
@@ -27,7 +27,18 @@ export default function projectsPage () {
     projects.appendChild(addCard).classList.add('addCard');
     content.appendChild(projects).classList.add('projects-content');
     let storeProjectsArray = [];
+    const storeTitleArray = [];
+    const titleArray = [];
+    const descriptionArray = [];
+    const dueDateArray = [];
+    let storeTodos = {};
+
+    const getItems = localStorage.getItem('PROJECTS');
     
+    if(getItems !== null) storeTodos  = JSON.parse((getItems));
+
+   
+    console.log(storeTodos)
 
 
 //Displays the modal in which the user can create a new project setting a title and a description
@@ -74,7 +85,12 @@ export default function projectsPage () {
         submit.addEventListener('click',submitProjectCard)
 
         function submitProjectCard() {
+
+            
+
+
             let i = storeTitleArray.length;
+            
 
             while (localStorage.getItem(`title${i}`)) {
                 i++;
@@ -119,7 +135,11 @@ export default function projectsPage () {
                 deleteProject.setAttribute('src', deleteB);
                 deleteProject.setAttribute('data-del', i);
                 
+                
+               
+                const project = title.textContent;
 
+                storeTodos.push({project, TODOS:[]});
                 
 
                 
@@ -131,6 +151,7 @@ export default function projectsPage () {
                     localStorage.removeItem(`title${i}`);
                     localStorage.removeItem(`description${i}`);
                     localStorage.removeItem(`dueDate${i}`);
+
                     
                     
                 })
@@ -192,9 +213,12 @@ export default function projectsPage () {
     //Populates the projects cards that have been previously created 
 
     //Pushes each item of the storeProjectsArray to the right array in the right order so they can be grouped properly 
-   const titleArray = [];
-   const descriptionArray = [];
-   const dueDateArray = [];
+   
+
+   
+  
+
+    
    
    (function updateInfoArrays (){
 
@@ -260,6 +284,12 @@ export default function projectsPage () {
                 deleteProject.setAttribute('src', deleteB);
                 openProject.addEventListener('click', function(){openingProject(title.textContent, dueDate.value)})
 
+                const project = title.textContent;
+
+                storeTodos.push({project, TODOS:[]})
+                
+                
+
 
                 deleteProject.addEventListener('click', ()=>{
                     
@@ -268,6 +298,7 @@ export default function projectsPage () {
                     localStorage.removeItem(descriptionArray[i].key);
                     localStorage.removeItem(dueDateArray[i].key);
 
+                    
                     
                 })
 
@@ -299,7 +330,7 @@ let projectName;
 function openingProject (title, dueDate) {
 
     
-    const project = document.createElement('div');
+    const openedProject = document.createElement('div');
     const header = document.createElement('header');
     const back = document.createElement('img');
     projectName = document.createElement('div');
@@ -318,31 +349,91 @@ function openingProject (title, dueDate) {
 
     
 
-  
-    
-    if (dueDate === '') { due.textContent = 'Due date not set'}
-    else {
-    due.textContent = 'Due: ' + formatDistanceToNow(new Date(dueDate), {addSuffix: true});
-    }
     
     
+    storeTodos.forEach(el=>{
 
-    header.appendChild(back).classList.add('back-from-project');
-    header.appendChild(projectName).classList.add('named-project');
-    rightButtons.appendChild(addTask).classList.add('add-task');
-    rightButtons.appendChild(notes).classList.add('project-notes');
-    rightButtons.appendChild(more).classList.add('project-more');
-    header.appendChild(rightButtons).classList.add('right-buttons')
-    project.appendChild(header).classList.add('project-header');
-    project.appendChild(todos).classList.add('todos');
-    project.appendChild(due).classList.add('due');
-    projects.appendChild(project).classList.add('project');
+        if (el.project === projectName.textContent) {
+
+            el.TODOS.forEach(todo=>{
+
+                const theTODO = document.createElement('div');
+                const theName = document.createElement('div');
+                const theDescription = document.createElement('div');
+                const theDue = document.createElement('div');
+                const flag = document.createElement('img');
+                
+                 theName.textContent = todo.name;
+                 theDescription.textContent = todo.description;
+                 theDue.textContent = todo.dueDate;
+                 
+                
+    
+                flag.setAttribute('src',flagCircle);
+
+
+                    if (todo.dueDate === '') {
+                        theDue.textContent = 'Due not set';
+                    }
+                    else {
+                    theDue.textContent = formatDistanceToNow(parseISO(todo.dueDate),{addSuffix: true});
+                    }
+
+                    ;
+
+                    if (todo.priority === '0') {
+
+                        flag.style.cssText = 'filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);';
+                    }
+                    else if (todo.priority === '1') {
+                        flag.style.cssText = 'filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);';
+                    }
+                    else if (todo.priority === '2') {
+                        flag.style.cssText = 'filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);';
+                    }
+                    else if (todo.priority === '3') {
+                        flag.style.cssText = 'filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);';
+                    }
+                    
+                    theTODO.appendChild(theName).classList.add('the-name');
+                    theTODO.appendChild(theDue).classList.add('the-due');
+                    theTODO.appendChild(theDescription).classList.add('the-description');
+                    theTODO.appendChild(flag).classList.add('flag');
+                    todos.appendChild(theTODO).classList.add('the-to-do')
+
+
+                                
+                            })
+                            
+                        }
+                    })
+                    
+
+                
+                    
+                    if (dueDate === '') { due.textContent = 'Due date not set'}
+                    else {
+                    due.textContent = 'Due: ' + formatDistanceToNow(new Date(dueDate), {addSuffix: true});
+                    }
+                    
+                    
+
+                    header.appendChild(back).classList.add('back-from-project');
+                    header.appendChild(projectName).classList.add('named-project');
+                    rightButtons.appendChild(addTask).classList.add('add-task');
+                    rightButtons.appendChild(notes).classList.add('project-notes');
+                    rightButtons.appendChild(more).classList.add('project-more');
+                    header.appendChild(rightButtons).classList.add('right-buttons')
+                    openedProject.appendChild(header).classList.add('project-header');
+                    openedProject.appendChild(todos).classList.add('todos');
+                    openedProject.appendChild(due).classList.add('due');
+                    projects.appendChild(openedProject).classList.add('project');
 
 
 //Closes the opened project
     back.addEventListener('click', ()=>{
 
-        projects.removeChild(project);
+        projects.removeChild(openedProject);
     })
 
 
@@ -508,10 +599,11 @@ function openDropDown (e) {
 
 }
 
-//Stores the new to-do information 
+//Stores the new to-do information and calls the function that creates the new to-do 
 
 
-const storeTodos = {};
+
+  
 function confirmingAddToDo () {
 
 
@@ -524,17 +616,15 @@ function confirmingAddToDo () {
 
         
         return;}
-
+        
         
 
-       storeTodos.newProject = [{'name':nameToDo.value, 'description':descriptionToDo.value, 'dueDate':todoDueDate.value, 'priority':priority.textContent}]
-       console.log(storeTodos);
-
-
-    
+        
+           
+        
+        
         
 
-  
 
     todos.removeChild(newToDo);
 
@@ -591,13 +681,6 @@ const createTODO =  () => {
 
 
 }
-//Creates all the to-do-lists
-
-(function renderTodos () {
-
-
-})()
-
 
 
 }
