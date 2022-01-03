@@ -1,837 +1,700 @@
-
-
-
-
 .projects-content {
-    width: 73vw ;
-    height: 80vh;
-    position: absolute;
-    top: 3%;
-    right: 1vw;
-    min-height: fit-content;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5%;
-    padding-left: 30px;
-
+  width: 73vw;
+  height: 80vh;
+  position: absolute;
+  top: 3%;
+  right: 1vw;
+  min-height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5%;
+  padding-left: 30px;
 }
 
-
-
 .addCard {
-
-    width: 20%;
-    height: 50%;
-    background: #78E9CC;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
+  width: 20%;
+  height: 50%;
+  background: #78e9cc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .addButton {
-    background: #004E64;
-    width: 64%;
-    height: 50%;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
+  background: #004e64;
+  width: 64%;
+  height: 50%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
 }
 
-.addButton::before, .addButton::after {
-    content: '';
-    position: absolute;
-    width: 7px;
-    height: 17%;
-    background: white;
+.addButton::before,
+.addButton::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 17%;
+  background: white;
 }
-
-
-
 
 .addButton::after {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
-.addButton:hover{
-    cursor: pointer;
-    
-    
-} 
+.addButton:hover {
+  cursor: pointer;
+}
 
-.addButton:hover  {
-    
-    animation: rotate 1.3s forwards ;
-
+.addButton:hover {
+  animation: rotate 1.3s forwards;
 }
 
 @keyframes rotate {
+  5% {
+    transform: rotate(0deg);
+  }
 
-    5% {
-
-        transform: rotate(0deg);
-    }
-
-    50% {
-        transform: rotate(180deg);
-
-    }
+  50% {
+    transform: rotate(180deg);
+  }
 }
 
 .addButton:active {
-
-    width: 54%;
-    height: 40%;
-    animation: none;
-    
+  width: 54%;
+  height: 40%;
+  animation: none;
 }
 
-.addButton:hover::before, .addButton:hover::after {
-    height: 68%;
+.addButton:hover::before,
+.addButton:hover::after {
+  height: 68%;
 }
 
-.addButton:active::before, .addButton:active::after {
-    height: 15%;
+.addButton:active::before,
+.addButton:active::after {
+  height: 15%;
 }
 
 .project-modal {
-
-    background: #5ACDC0;
-    position: fixed;
-    z-index: 20;
-    width: 60vw ;
-    height: 60vh;
-    top: 15%;
-    left: 60%;
-    transform: translate(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 10px;
-    padding-bottom: 20px;
-    padding-top: 30px;
-
+  background: #5acdc0;
+  position: fixed;
+  z-index: 20;
+  width: 60vw;
+  height: 60vh;
+  top: 15%;
+  left: 60%;
+  transform: translate(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  padding-top: 30px;
 }
 
 .project-label {
-
-    font-size: 1.6rem;
-    color: white;
+  font-size: 1.6rem;
+  color: white;
 }
 
 .project-name {
-
-    border-radius: 20px;
-    font-family:'Roboto Mono', monospace;
-    height: 10%;
-    width: 50%;
-    font-size: 1.6rem;
-    border: none;
-    padding-left: 10px;
+  border-radius: 20px;
+  font-family: "Roboto Mono", monospace;
+  height: 10%;
+  width: 50%;
+  font-size: 1.6rem;
+  border: none;
+  padding-left: 10px;
 }
 
 .close-modal {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 3.5%;
-    height: 8%;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    align-self: flex-end;
-    margin-right: 30px;
-    
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5%;
+  height: 8%;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  align-self: flex-end;
+  margin-right: 30px;
 }
 
-.close-modal::before{
-
-    content: '';
-    width: 3px;
-    height: 100%;
-    background: black;
-    transform: rotate(45deg);  
+.close-modal::before {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background: black;
+  transform: rotate(45deg);
 }
 
-.close-modal::after{
-
-    content: '';
-    width: 3px;
-    height: 100%;
-    background: black;
-    transform: rotate(-45deg);  
-
-
+.close-modal::after {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background: black;
+  transform: rotate(-45deg);
 }
 
 .project-description {
-
-    width: 70%;
-    height: 18%;
-    font-family:'Roboto Mono', monospace;
-    border-radius: 10px;
-    font-size: 1.6rem;
-    border: none;
-    padding-left: 8px;
-
-
-
-    
+  width: 70%;
+  height: 18%;
+  font-family: "Roboto Mono", monospace;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  border: none;
+  padding-left: 8px;
 }
 
 .label-description {
-    font-size: 1.6rem;
-    color: white;
+  font-size: 1.6rem;
+  color: white;
 }
 
 .submit {
-    font-family:'Roboto Mono', monospace;
-    width: 30%;
-    height: 20%;
-    background: #004E64;
-    color: white;
-    font-size: 1.6rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    
-
+  font-family: "Roboto Mono", monospace;
+  width: 30%;
+  height: 20%;
+  background: #004e64;
+  color: white;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .submit:hover {
-
-    background: #78E9CC;
+  background: #78e9cc;
 }
 
-
 .new-project-card {
-
-    width: 20%;
-    height: 50%;
-    background: #78E9CC;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-
+  width: 20%;
+  height: 50%;
+  background: #78e9cc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .new-header {
-
-    background: #004E64;
-    color: white;
-    height: 35%;
-    font-size: 1.5rem;
-    border-radius: 5px;
-    padding-left: 5px;
-    display: flex;
-    flex-direction: column;
-    
-
-    
+  background: #004e64;
+  color: white;
+  height: 35%;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .new-title {
-
-    padding-top: 15px;
-    padding-left: 15px;
-    display: flex;
-    flex-direction: column;
+  padding-top: 15px;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .new-title::after {
-    content : '';
-    width: 100%;
-    height: 2px;
-    background: white;
-    align-self:flex-end;
-    margin-right: 10px;
-    
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: white;
+  align-self: flex-end;
+  margin-right: 10px;
 }
 
 .new-due-date {
-    height: 25%;
-    width: 50%;
-    justify-self: flex-end;
-    align-self:flex-end;
-    background: inherit;
-    border: none;
-    color: white;
-    margin-top: 18%;
-    outline: 2px solid #9FFFCB;
-    border-radius: 5px;
-    font-weight: bold;
-    font-family: inherit;
+  height: 25%;
+  width: 50%;
+  justify-self: flex-end;
+  align-self: flex-end;
+  background: inherit;
+  border: none;
+  color: white;
+  margin-top: 18%;
+  outline: 2px solid #9fffcb;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: inherit;
 }
 
 .due-date-label {
-    font-size: 0.9rem;
-    padding-right: 2.4rem;
+  font-size: 0.9rem;
+  padding-right: 2.4rem;
 }
 
 .new-description {
-    color: white;
-    font-size: 1.1rem;
-    padding-top: 25px;
-    padding-left: 15px;
-    max-width: 100%;
-    height: auto;
-    min-height: 50%;
-    overflow-wrap: break-word;
+  color: white;
+  font-size: 1.1rem;
+  padding-top: 25px;
+  padding-left: 15px;
+  max-width: 100%;
+  height: auto;
+  min-height: 50%;
+  overflow-wrap: break-word;
 }
 
 .open-project {
-
-    font-family:'Roboto Mono', monospace;
-    background: #004E64;
-    border: none;
-    color: white;
-    width: 35%;
-    height: 15%;
-    border-radius: 10px;
-    justify-self: flex-end;
-    align-self: center;
-    margin-bottom: 10px;
-    cursor: pointer;
+  font-family: "Roboto Mono", monospace;
+  background: #004e64;
+  border: none;
+  color: white;
+  width: 35%;
+  height: 15%;
+  border-radius: 10px;
+  justify-self: flex-end;
+  align-self: center;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .open-project:hover {
-
-    background: #9FFFCB;
+  background: #9fffcb;
 }
 
 .deleteB {
-    width: 12%;
-    height: 10%;
-    align-self:flex-end;
-    margin-right: 10px;
-    margin-bottom: 3px;
+  width: 12%;
+  height: 10%;
+  align-self: flex-end;
+  margin-right: 10px;
+  margin-bottom: 3px;
 }
 
 .deleteB:hover {
-
-    cursor: pointer;
+  cursor: pointer;
 }
 
-
-
 .project {
-
-    top: 5%;
-    left: 5%;
-    bottom: 5%;
-    right: 5%;
-    position: fixed;
-    background: rgba(0,0,0, 0.5);
-    box-shadow: -15px 15px 25px rgba(0,0,0,.7);
-    z-index: 13;
-    backdrop-filter: blur(5px);
-    display: grid;
-    grid-template-columns: 90% 10%;
-    grid-template-rows: 10% 90%;
-    border-radius: 10px;
-    overflow: hidden;
-    font-family:'Roboto Mono', monospace;
-    animation: scale 0.15s linear 0s ;
-    overflow-y: scroll;
-
-
+  top: 5%;
+  left: 5%;
+  bottom: 5%;
+  right: 5%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: -15px 15px 25px rgba(0, 0, 0, 0.7);
+  z-index: 13;
+  backdrop-filter: blur(5px);
+  display: grid;
+  grid-template-columns: 90% 10%;
+  grid-template-rows: 10% 90%;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: "Roboto Mono", monospace;
+  animation: scale 0.15s linear 0s;
+  overflow-y: scroll;
 }
 
 @keyframes scale {
-    
-    0% {
-    transform:scale(0.1);
-    }
-
- 
+  0% {
+    transform: scale(0.1);
+  }
 }
-
-
 
 .project-header {
-    position: fixed;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    height: 8%;
-    width: 100%;
-    background: rgba(256,256,256,0.6);
-    font-family: 'Roboto Mono', monospace;
-    display: flex;
-    justify-content: space-between;
-    margin-right: 20px;
+  position: fixed;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  height: 8%;
+  width: 100%;
+  background: rgba(256, 256, 256, 0.6);
+  font-family: "Roboto Mono", monospace;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
 }
-
-
 
 .back-from-project:hover {
-
-    background: rgba(256,256,256,1);
+  background: rgba(256, 256, 256, 1);
 }
 
-
-
-
 .named-project {
-
-    font-size: 2.9em;
-    margin-left: -25%;
-
+  font-size: 2.9em;
+  margin-left: -25%;
 }
 
 .right-buttons {
-    
-    display: flex;
-    justify-content: space-between;
-    width: 22%;
+  display: flex;
+  justify-content: space-between;
+  width: 22%;
 }
 
-
 .add-task {
-
-    font-family: 'Roboto Mono', monospace;
-    width: 7em;
-    height: 70%;
-    align-self: center;
-    border: none;
-    background: #004E64;
-    color: white;
-    border-radius: 30px;
-    cursor: pointer;
-
+  font-family: "Roboto Mono", monospace;
+  width: 7em;
+  height: 70%;
+  align-self: center;
+  border: none;
+  background: #004e64;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
 }
 
 .add-task:hover {
-
-    background: #78E9CC;
+  background: #78e9cc;
 }
 
 .project-notes {
-    color: white;
-    font-family: 'Roboto Mono', monospace;
-    width: 5.5em;
-    height: 70%;
-    align-self: center;
-    border: none;
-    background: #004E64;
-    border-radius: 10px;
-    cursor: pointer;
-
-
-
-
+  color: white;
+  font-family: "Roboto Mono", monospace;
+  width: 5.5em;
+  height: 70%;
+  align-self: center;
+  border: none;
+  background: #004e64;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .project-notes:hover {
-
-    background: #78E9CC;
+  background: #78e9cc;
 }
 
 .project-more:hover {
-
-    cursor: pointer;
-    background: white;
-    
+  cursor: pointer;
+  background: white;
 }
 
 .due {
-
-    
-    height: 10%;
-    grid-column-start: -2;
-    grid-column-end: -1;
-    grid-row-start: 2;
-    color: white;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    display: grid;
-    justify-content:center;
-    
-
-    
+  height: 10%;
+  grid-column-start: -2;
+  grid-column-end: -1;
+  grid-row-start: 2;
+  color: white;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  display: grid;
+  justify-content: center;
 }
 
 .due::after {
-    content: '';
-    background: white;
-    width: 100%;
-    height: 2px;
+  content: "";
+  background: white;
+  width: 100%;
+  height: 2px;
 }
 
 .todos {
-    
-    position: absolute;
-    width: 90%;
-    grid-row-start: 2;
-    display: flex;
-    flex-direction: column;
-    gap: .7rem;
+  position: absolute;
+  width: 90%;
+  grid-row-start: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 
 .to-do-new {
-
-    background: rgba(256,256,256, 0.8);
-    margin-right: 5%;
-    border-radius: 50px;
-    padding-left: 35px;
-    margin-left: 15px;
-    height: 19vh;
-    display: grid;
-    grid-template-columns: 80% 20%;
-    grid-template-rows: 38% 32% 30%;
-    gap: 5px;
-    
-
+  background: rgba(256, 256, 256, 0.8);
+  margin-right: 5%;
+  border-radius: 50px;
+  padding-left: 35px;
+  margin-left: 15px;
+  height: 19vh;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: 38% 32% 30%;
+  gap: 5px;
 }
 
 .to-do-name-div {
-    grid-column-start: 1;
-    position: relative;
+  grid-column-start: 1;
+  position: relative;
 }
 
 .to-do-name {
-    position: absolute;
-    width: 100%;
-    height: 90%;
-    top: 5px;
-    left: 0;
-    background: none;
-    border-radius: 25px;
-    border: 3px solid #004E64;
-    padding-left: 15px;
-    font-family: inherit;
-    font-size: inherit;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  top: 5px;
+  left: 0;
+  background: none;
+  border-radius: 25px;
+  border: 3px solid #004e64;
+  padding-left: 15px;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .to-do-name-label {
+  position: absolute;
+  left: 1.2rem;
+  top: 1.65rem;
+  transition: top 200ms ease-in, font-size 200ms ease-in, padding 200ms ease-in;
+}
 
-    position: absolute;
-    left: 1.2rem;
-    top: 1.65rem;
-    transition: top 200ms ease-in,
-                font-size 200ms ease-in,
-                padding 200ms ease-in;
-
-}               
-
-.to-do-name:focus~.to-do-name-label,
-.to-do-name:not(:placeholder-shown).to-do-name:not(:focus)~.to-do-name-label {
-
-    top: 0;
-    font-size: .8rem;
-    background: rgba(220,220,220, 1);
-    padding: 0 .25rem;
-    
-
+.to-do-name:focus ~ .to-do-name-label,
+.to-do-name:not(:placeholder-shown).to-do-name:not(:focus) ~ .to-do-name-label {
+  top: 0;
+  font-size: 0.8rem;
+  background: rgba(220, 220, 220, 1);
+  padding: 0 0.25rem;
 }
 
 .to-do-description-div {
-    grid-column-start: 1;
-    position: relative;
+  grid-column-start: 1;
+  position: relative;
 }
 
 .to-do-description {
-
-    position: absolute;
-    width: 100%;
-    height: 90%;
-    top: 5px;
-    left: 0;
-    background: none;
-    border-radius: 25px;
-    border: 3px solid #007A9A;
-    padding-left: 15px;
-    font-family: inherit;
-    font-size: inherit;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  top: 5px;
+  left: 0;
+  background: none;
+  border-radius: 25px;
+  border: 3px solid #007a9a;
+  padding-left: 15px;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .to-do-description-label {
-
-    position: absolute;
-    left: 1.2rem;
-    top: 1.3rem;
-    transition: top 200ms ease-in,
-                font-size 200ms ease-in,
-                padding 200ms ease-in;
+  position: absolute;
+  left: 1.2rem;
+  top: 1.3rem;
+  transition: top 200ms ease-in, font-size 200ms ease-in, padding 200ms ease-in;
 }
 
-.to-do-description:focus~.to-do-description-label,
-.to-do-description:not(:placeholder-shown).to-do-description:not(:focus)~.to-do-description-label {
-
-    top: 0;
-    font-size: .8rem;
-    background: rgba(220,220,220, 1);
-    padding: 0 .25rem;
-    
-
+.to-do-description:focus ~ .to-do-description-label,
+.to-do-description:not(:placeholder-shown).to-do-description:not(:focus)
+  ~ .to-do-description-label {
+  top: 0;
+  font-size: 0.8rem;
+  background: rgba(220, 220, 220, 1);
+  padding: 0 0.25rem;
 }
-
-
 
 .to-do-priority-div {
-    grid-column-start: 2;
-    display: flex;
-    gap: .7rem;
-    margin-left: 30px;
-    margin-top: 10px;
-    
+  grid-column-start: 2;
+  display: flex;
+  gap: 0.7rem;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
 .to-do-priority {
-
-    background: red;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
+  background: red;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
 }
 
 .to-do-priority::after {
-
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid #5ACDC0 ;
-    position: absolute;
-    transform: translateX(25px);
-    transition: transform 50ms ease-in;
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #5acdc0;
+  position: absolute;
+  transform: translateX(25px);
+  transition: transform 50ms ease-in;
 }
 
 .priority-dropdown.active > .to-do-priority::after {
-
-    content: '';
-    width: 0;
-    height: 0;
-    transform: rotate(90deg) translateY(-25px);
-    position: absolute;
-    
+  content: "";
+  width: 0;
+  height: 0;
+  transform: rotate(90deg) translateY(-25px);
+  position: absolute;
 }
 
 .to-do-priority1 {
-    background: red;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    justify-content: center;
+  background: red;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .to-do-priority2 {
-    background: orange;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    justify-content: center;
+  background: orange;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .to-do-priority3 {
-    background: yellow;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    justify-content: center;
+  background: yellow;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
 .to-do-priority4 {
-    background: green;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    color: white;
-    display: flex;
-    justify-content: center;
+  background: green;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
-
 
 .to-do-priority1::after {
-    position: absolute;
-    content: 'Very high';
-    width: 6.1rem;
-    left: 89%;
-    color: #002D38;
-    height: 1.9rem;
-
-
+  position: absolute;
+  content: "Very high";
+  width: 6.1rem;
+  left: 89%;
+  color: #002d38;
+  height: 1.9rem;
 }
 .to-do-priority2::after {
-    position: absolute;
-    content: 'High';
-    left: 89%;
-    color: #002D38;
-    width: 6.1rem;
-    height: 1.9rem;
-
-
-}.to-do-priority3::after {
-    position: absolute;
-    content: 'Medium';
-    left: 89%;
-    color: #002D38;
-    width: 6.1rem;
-    height: 1.9rem;
-
-
-
-}.to-do-priority4::after {
-    position: absolute;
-    content: 'Low';
-    left: 89%;
-    color: #002D38;
-    width: 6.1rem;
-    height: 1.9rem;
-
+  position: absolute;
+  content: "High";
+  left: 89%;
+  color: #002d38;
+  width: 6.1rem;
+  height: 1.9rem;
 }
-
-
+.to-do-priority3::after {
+  position: absolute;
+  content: "Medium";
+  left: 89%;
+  color: #002d38;
+  width: 6.1rem;
+  height: 1.9rem;
+}
+.to-do-priority4::after {
+  position: absolute;
+  content: "Low";
+  left: 89%;
+  color: #002d38;
+  width: 6.1rem;
+  height: 1.9rem;
+}
 
 .to-do-priority1::before,
 .to-do-priority2::before,
 .to-do-priority3::before,
 .to-do-priority4::before {
-    position: absolute;
-    content: '';
-    width: 8%;
-    right: 5%;
-    height: 1px;
-    background: #002D38;
-    transform: translateY(-5px);
+  position: absolute;
+  content: "";
+  width: 8%;
+  right: 5%;
+  height: 1px;
+  background: #002d38;
+  transform: translateY(-5px);
 }
 
-
-
 .priority-dropdown.active {
-
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    width: 10rem;
-    height: fit-content;
-    gap: 10px;
-    background: rgba(240,240,240, 1);
-    border-radius: 25px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    z-index: 5;
-    
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 10rem;
+  height: fit-content;
+  gap: 10px;
+  background: rgba(240, 240, 240, 1);
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  z-index: 5;
 }
 
 .to-do-due-div {
-
-    grid-column-start: 2;
-    grid-row-start: 1;
-    margin-top: 10px;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  margin-top: 10px;
 }
 
 .close-to-do {
-
-    width: 2rem;
-    height: 2rem;
-    margin-bottom: 10px;
-    font-family: inherit;
-    justify-self: start;
-    align-self:center;
-    border: none;
-    border-radius: 100%;
-    cursor: pointer;
-
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 10px;
+  font-family: inherit;
+  justify-self: start;
+  align-self: center;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
 }
 
 .close-to-do:hover {
-
-    background: rgba(256,0,0, 0.7);
+  background: rgba(256, 0, 0, 0.7);
 }
 
 .to-do-confirm {
-    
-    grid-column-start: 2;
-    width: 60%;
-    height: 70%;
-    margin-bottom: 5px;
-    background: #004E64;
-    color: white;
-    cursor: pointer;
-    font-family: inherit;
-    border-radius: 25px;
-    border: none;
+  grid-column-start: 2;
+  width: 60%;
+  height: 70%;
+  margin-bottom: 5px;
+  background: #004e64;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  border-radius: 25px;
+  border: none;
 }
 
 .to-do-due {
-
-    border-radius: 15px;
-    padding-left: 10px;
-    border: none;
-    background: #002D38;
-    color: white;
-    padding-right: 5px;
-    font-family: inherit;
-    width: 80%;
-    margin-top: 5px;
-
+  border-radius: 15px;
+  padding-left: 10px;
+  border: none;
+  background: #002d38;
+  color: white;
+  padding-right: 5px;
+  font-family: inherit;
+  width: 80%;
+  margin-top: 5px;
 }
 
 ::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+  filter: invert(1);
 }
 
-
-
 .to-do-confirm:hover {
-    background: #002D38 ;
+  background: #002d38;
 }
 
 ::-webkit-scrollbar {
-
-    width: 1em;
-    
+  width: 1em;
 }
 
 ::-webkit-scrollbar-track {
-
-    
-    
-    background: #007A9A;
+  background: #007a9a;
 }
 
 ::-webkit-scrollbar-thumb {
-
-    border-radius: 10px;
-    background: #9FFFCB;
+  border-radius: 10px;
+  background: #9fffcb;
 }
 
 .the-to-do {
-
-    width: 50%;
-    margin-left: 15px;
-    height: 10vh ;
-    padding: 15px;
-    background: rgba(256,256,256, 0.8);
-    border-radius: 50px;
-    display: grid;
-    grid-template-columns: 80% 20%;
+  width: 50%;
+  margin-left: 15px;
+  height: 10vh;
+  padding: 15px;
+  background: rgba(256, 256, 256, 0.8);
+  border-radius: 50px;
+  display: grid;
+  grid-template-columns: 80% 20%;
 }
 
-
-
 .flag {
-
-    width: 48px;
-    height: 48px;
+  width: 48px;
+  height: 48px;
 }

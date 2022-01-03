@@ -1,94 +1,93 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Space+Mono:wght@700&family=Titillium+Web:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Space+Mono:wght@700&family=Titillium+Web:wght@600&display=swap");
 
-*,*::before,*::after {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    font-family:'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 .header {
-
-    display: flex;
-    justify-content: center;
-    background-image: linear-gradient(to left,#78E9CC,#004E64,#78E9CC);
-    font-size: 3rem;
-    height:1.7em;
-    color: silver;
-    font-family: 'Space Mono', monospace;
-    position: fixed;
-    width: 100vw;
-    z-index: 11;
-    right: 1%;
-    border-bottom-right-radius: 40px;
-    
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(to left, #78e9cc, #004e64, #78e9cc);
+  font-size: 3rem;
+  height: 1.7em;
+  color: silver;
+  font-family: "Space Mono", monospace;
+  position: fixed;
+  width: 100vw;
+  z-index: 11;
+  right: 1%;
+  border-bottom-right-radius: 40px;
 }
 
 .menu {
-
-    width: 25vw;
-    height: 65vh;
-    background-image: linear-gradient(#25A18E 40%,#004E64);
-    margin-top: .5em;
-    border-top-right-radius:3em;
-    border-bottom-right-radius: 5em;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    font-size: 1.5rem;
-    position: fixed;
-    top: 10%;
-    z-index: 11;
+  width: 25vw;
+  height: 65vh;
+  background-image: linear-gradient(#25a18e 40%, #004e64);
+  margin-top: 0.5em;
+  border-top-right-radius: 3em;
+  border-bottom-right-radius: 5em;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 1.5rem;
+  position: fixed;
+  top: 10%;
+  z-index: 11;
 }
 
-.everyday, .notes , .projects {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1em;
-    padding-top: 1em;
-    cursor: pointer;
+.everyday,
+.notes,
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  padding-top: 1em;
+  cursor: pointer;
 }
 
-.everyday::after, .notes::after, .projects::after {
-    content: '';
-    width: 100%;
-    background: white;
-    height: 1px;
-
+.everyday::after,
+.notes::after,
+.projects::after {
+  content: "";
+  width: 100%;
+  background: white;
+  height: 1px;
 }
 
-.everyday:hover, .notes:hover, .projects:hover {
-
-    background: #004E64;
+.everyday:hover,
+.notes:hover,
+.projects:hover {
+  background: #004e64;
 }
 
 .everyday:hover {
-    border-top-right-radius: 3em;
+  border-top-right-radius: 3em;
 }
 
 .content {
-    width: 73vw ;
-    height: 80vh;
-    position: absolute;
-    top: 10%;
-    right: 1vw;
-    min-height: fit-content;
-    
+  width: 73vw;
+  height: 80vh;
+  position: absolute;
+  top: 10%;
+  right: 1vw;
+  min-height: fit-content;
 }
 
-input[type=text] {
-
-    outline: #25A18E;
+input[type="text"] {
+  outline: #25a18e;
 }
 
-input[type=text]:focus {
-
-    outline: #25A18E;
-    outline-width: 3px;
-
+input[type="text"]:focus {
+  outline: #25a18e;
+  outline-width: 3px;
 }

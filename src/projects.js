@@ -33,6 +33,8 @@ export default function projectsPage () {
     const dueDateArray = [];
     let storeTodos = {};
 
+    
+
     const getItems = localStorage.getItem('PROJECTS');
     
     if(getItems !== null) storeTodos  = JSON.parse((getItems));
@@ -137,9 +139,11 @@ export default function projectsPage () {
                 
                 
                
-                const project = title.textContent;
+                    let project = title.textContent;
 
-                storeTodos.push({project, TODOS:[]});
+                    storeTodos[project] = {TODOS:[]};
+                    console.log(storeTodos)
+                    localStorage.setItem('PROJECTS', JSON.stringify(storeTodos));
                 
 
                 
@@ -151,6 +155,8 @@ export default function projectsPage () {
                     localStorage.removeItem(`title${i}`);
                     localStorage.removeItem(`description${i}`);
                     localStorage.removeItem(`dueDate${i}`);
+                    console.log(titleArray)
+                    
 
                     
                     
@@ -284,9 +290,7 @@ export default function projectsPage () {
                 deleteProject.setAttribute('src', deleteB);
                 openProject.addEventListener('click', function(){openingProject(title.textContent, dueDate.value)})
 
-                const project = title.textContent;
-
-                storeTodos.push({project, TODOS:[]})
+              
                 
                 
 
@@ -348,65 +352,10 @@ function openingProject (title, dueDate) {
     notes.textContent = 'Notes';
 
     
-
     
     
-    storeTodos.forEach(el=>{
-
-        if (el.project === projectName.textContent) {
-
-            el.TODOS.forEach(todo=>{
-
-                const theTODO = document.createElement('div');
-                const theName = document.createElement('div');
-                const theDescription = document.createElement('div');
-                const theDue = document.createElement('div');
-                const flag = document.createElement('img');
-                
-                 theName.textContent = todo.name;
-                 theDescription.textContent = todo.description;
-                 theDue.textContent = todo.dueDate;
-                 
-                
     
-                flag.setAttribute('src',flagCircle);
-
-
-                    if (todo.dueDate === '') {
-                        theDue.textContent = 'Due not set';
-                    }
-                    else {
-                    theDue.textContent = formatDistanceToNow(parseISO(todo.dueDate),{addSuffix: true});
-                    }
-
-                    ;
-
-                    if (todo.priority === '0') {
-
-                        flag.style.cssText = 'filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);';
-                    }
-                    else if (todo.priority === '1') {
-                        flag.style.cssText = 'filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);';
-                    }
-                    else if (todo.priority === '2') {
-                        flag.style.cssText = 'filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);';
-                    }
-                    else if (todo.priority === '3') {
-                        flag.style.cssText = 'filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);';
-                    }
-                    
-                    theTODO.appendChild(theName).classList.add('the-name');
-                    theTODO.appendChild(theDue).classList.add('the-due');
-                    theTODO.appendChild(theDescription).classList.add('the-description');
-                    theTODO.appendChild(flag).classList.add('flag');
-                    todos.appendChild(theTODO).classList.add('the-to-do')
-
-
-                                
-                            })
-                            
-                        }
-                    })
+    
                     
 
                 
@@ -681,6 +630,7 @@ const createTODO =  () => {
 
 
 }
+
 
 
 }
