@@ -5,7 +5,6 @@ import moreIMG from "./Img/more.png";
 import closeIMG from "./Img/close.png";
 import flagCircle from "./Img/flag-circle.png";
 import { parseISO } from "date-fns";
-import { over } from "lodash";
 
 //Stores the titles of the projects created so it can give the right index to each one of them
 
@@ -353,6 +352,14 @@ export default function projectsPage() {
           "filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);";
       }
 
+      theTODO.addEventListener(
+        "click",
+        function () {
+          editTODOS(theTODO);
+        },
+        { once: true }
+      );
+
       theTODO.appendChild(theName).classList.add("the-name");
       theTODO.appendChild(theDue).classList.add("the-due");
       theTODO.appendChild(theDescription).classList.add("the-description");
@@ -581,6 +588,14 @@ export default function projectsPage() {
     theTODO.appendChild(imgDiv).classList.add("img-div");
     todos.appendChild(theTODO).classList.add("the-to-do");
 
+    theTODO.addEventListener(
+      "click",
+      function () {
+        editTODOS(theTODO, theName, theDescription, theDue, flag);
+      },
+      { once: true }
+    );
+
     storeTodos[projectName.textContent].push({
       title: nameToDo.value,
       description: descriptionToDo.value,
@@ -591,5 +606,89 @@ export default function projectsPage() {
     localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
   };
 
-  //Gives functionality to the edit buttons of each to-do so the user can edit any information the to-do has
+  //Opens the to-do that the user clicks on and expands it so the user can change it's content
+
+  function editTODOS(parent, title, description, due, flag) {
+    parent.style.cssText = "width:90%; height:20vh";
+
+    for (let i = 0; i <= 4; i++)
+      if (parent.firstChild) {
+        parent.removeChild(parent.lastChild);
+      }
+
+    nameDiv = document.createElement("div");
+    nameToDo = document.createElement("input");
+    nameToDoLabel = document.createElement("label");
+    descriptionDiv = document.createElement("div");
+    descriptionToDo = document.createElement("input");
+    descriptionToDoLabel = document.createElement("label");
+    todoDueDiv = document.createElement("div");
+    todoDueDate = document.createElement("input");
+    todoDueDateLabel = document.createElement("label");
+    priorityDiv = document.createElement("div");
+    priority = document.createElement("div");
+    priorityText = document.createElement("div");
+    confirmToDo = document.createElement("button");
+    priorityDropDown = document.createElement("div");
+    closeB = document.createElement("img");
+    priority1 = document.createElement("div");
+    priority2 = document.createElement("div");
+    priority3 = document.createElement("div");
+    priority4 = document.createElement("div");
+
+    priority1.textContent = 0;
+    priority2.textContent = 1;
+    priority3.textContent = 2;
+    priority4.textContent = 3;
+
+    priority.dataset.priority = 1;
+    priority1.dataset.priority = 2;
+    priority2.dataset.priority = 3;
+    priority3.dataset.priority = 4;
+    priority4.dataset.priority = 5;
+
+    nameToDo.setAttribute("type", "text");
+    nameToDo.setAttribute("placeholder", " ");
+    nameToDoLabel.textContent = "To-do";
+    descriptionToDo.setAttribute("type", "text");
+    descriptionToDo.setAttribute("placeholder", " ");
+    descriptionToDoLabel.textContent = "Description";
+    todoDueDate.setAttribute("type", "datetime-local");
+    todoDueDate.setAttribute("id", "to-do-due");
+    todoDueDateLabel.setAttribute("for", "to-do-due");
+    todoDueDateLabel.textContent = "Set deadline: ";
+    confirmToDo.textContent = "Confirm";
+    priority.textContent = "0";
+    priorityText.textContent = "Set priority: ";
+    closeB.setAttribute("src", closeIMG);
+
+    nameDiv.appendChild(nameToDo).classList.add("to-do-name");
+    nameDiv.appendChild(nameToDoLabel).classList.add("to-do-name-label");
+    parent.appendChild(nameDiv).classList.add("to-do-name-div");
+    descriptionDiv
+      .appendChild(descriptionToDo)
+      .classList.add("to-do-description");
+    descriptionDiv
+      .appendChild(descriptionToDoLabel)
+      .classList.add("to-do-description-label");
+    parent.appendChild(descriptionDiv).classList.add("to-do-description-div");
+    todoDueDiv.appendChild(todoDueDateLabel).classList.add("to-do-due-label");
+    todoDueDiv.appendChild(todoDueDate).classList.add("to-do-due");
+    parent.appendChild(todoDueDiv).classList.add("to-do-due-div");
+    priorityDiv.appendChild(priorityText).classList.add("to-do-priority-label");
+    priorityDropDown.appendChild(priority).classList.add("to-do-priority");
+    priorityDiv
+      .appendChild(priorityDropDown)
+      .classList.add("priority-dropdown");
+    parent.appendChild(priorityDiv).classList.add("to-do-priority-div");
+    parent.appendChild(closeB).classList.add("close-to-do");
+    parent.appendChild(confirmToDo).classList.add("to-do-confirm");
+
+    closeB.addEventListener("click", () => {
+      todos.removeChild(parent);
+    });
+
+    priorityDropDown.addEventListener("click", openDropDown);
+    confirmToDo.addEventListener("click", confirmingAddToDo);
+  }
 }

@@ -703,12 +703,14 @@
   border-radius: 50px;
   display: grid;
   grid-template-columns: 80% 20%;
+  cursor: pointer;
 }
 
 .the-name {
   display: flex;
   flex-direction: column;
   align-self: center;
+  font-size: 1.2rem;
 }
 
 .the-name::after {
@@ -724,6 +726,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .img-div {
