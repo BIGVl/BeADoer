@@ -385,8 +385,9 @@
   width: 90%;
   grid-row-start: 2;
   display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
+  flex-wrap: wrap;
+  column-gap: 0.7rem;
+  row-gap: 1rem;
 }
 
 .to-do-new {
@@ -400,6 +401,14 @@
   grid-template-columns: 80% 20%;
   grid-template-rows: 38% 32% 30%;
   gap: 5px;
+  width: 95%;
+}
+
+.overmax-new {
+  position: absolute;
+  color: red;
+  bottom: 5px;
+  left: 6rem;
 }
 
 .to-do-name-div {
@@ -684,17 +693,57 @@
 }
 
 .the-to-do {
-  width: 50%;
+  width: 45%;
   margin-left: 15px;
   height: 10vh;
-  padding: 15px;
+  padding-left: 2.4rem;
+  padding-right: 15px;
+  padding-top: 5px;
   background: rgba(256, 256, 256, 0.8);
   border-radius: 50px;
   display: grid;
   grid-template-columns: 80% 20%;
 }
 
+.the-name {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.the-name::after {
+  content: "";
+  width: 98%;
+  height: 1px;
+  background: black;
+}
+
+.the-description {
+  align-self: center;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.img-div {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1rem;
+  padding-bottom: 5px;
+}
+
 .flag {
-  width: 48px;
-  height: 48px;
+  width: 2.4rem;
+  height: 2.4rem;
+  align-self: flex-end;
+  margin-right: 15px;
+}
+
+.delete-to-do,
+.edit-to-do {
+  width: 1.5rem;
+  height: 1.5rem;
+  align-self: flex-end;
+  cursor: pointer;
 }
