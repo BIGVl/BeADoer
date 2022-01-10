@@ -5,6 +5,7 @@ import moreIMG from "./Img/more.png";
 import closeIMG from "./Img/close.png";
 import flagCircle from "./Img/flag-circle.png";
 import { parseISO } from "date-fns";
+import { check } from "prettier";
 
 //Stores the titles of the projects created so it can give the right index to each one of them
 
@@ -28,7 +29,6 @@ export default function projectsPage() {
   const getItems = localStorage.getItem("PROJECTS");
 
   if (getItems !== null) storeTodos = JSON.parse(getItems);
-
   console.log(storeTodos);
 
   //Displays the modal in which the user can create a new project setting a title and a description
@@ -76,15 +76,21 @@ export default function projectsPage() {
 
     //Adds the project's card when the user clicks submit on the modal that creates the project, adds a input date so the user can set if he wishes to, a dueDate
     submit.addEventListener("click", submitProjectCard);
-
+    let overMax = document.createElement("div");
     function submitProjectCard() {
+      if (storeTodos[projectName.value]) {
+        overMax.textContent = "Project name already exists!";
+        overMax.style.cssText = "color: red";
+        projectCard.appendChild(overMax).classList.add("over-max");
+        return;
+      }
+
       let i = storeTitleArray.length;
 
       while (localStorage.getItem(`title${i}`)) {
         i++;
       }
 
-      let overMax = document.createElement("div");
       if (projectName.value === "") return;
       if (projectName.value.length > 16) {
         overMax.textContent =
@@ -96,7 +102,7 @@ export default function projectsPage() {
         projectName.value.length < 16 &&
         projectCard.contains(overMax)
       ) {
-        projectName.removeChild(overMax);
+        projectCard.removeChild(overMax);
       }
       if (description.value.length >= 144) {
         overMax.textContent =
@@ -128,7 +134,7 @@ export default function projectsPage() {
       let project = title.textContent;
 
       storeTodos[project] = [];
-      console.log(storeTodos);
+
       localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
 
       deleteProject.addEventListener("click", () => {
@@ -136,7 +142,8 @@ export default function projectsPage() {
         localStorage.removeItem(`title${i}`);
         localStorage.removeItem(`description${i}`);
         localStorage.removeItem(`dueDate${i}`);
-        console.log(titleArray);
+        delete storeTodos[title.textContent];
+        localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
       });
 
       headerNew.appendChild(title).classList.add("new-title");
@@ -244,6 +251,8 @@ export default function projectsPage() {
         localStorage.removeItem(titleArray[i].key);
         localStorage.removeItem(descriptionArray[i].key);
         localStorage.removeItem(dueDateArray[i].key);
+        delete storeTodos[title.textContent];
+        localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
       });
 
       dueDate.addEventListener("change", () => {
@@ -312,7 +321,7 @@ export default function projectsPage() {
 
     //Opens the menu that creates a new to-do
     addTask.addEventListener("click", addingTasks);
-    console.log(storeTodos);
+
     //Creates all the saved to-do lists
     storeTodos[title].forEach((todo) => {
       const theTODO = document.createElement("div");
@@ -361,13 +370,19 @@ export default function projectsPage() {
       todos.appendChild(theTODO).classList.add("the-to-do");
 
       deleteB.addEventListener("click", () => {
+        let i = 0;
         todos.removeChild(theTODO);
         storeTodos[projectName.textContent].forEach((todo) => {
           if (todo.title === theName.textContent) {
-            console.log(storeTodos[projectName.textContent][todo.title]);
+            storeTodos[projectName.textContent].splice(i, 1);
+            localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+            i = 0;
           }
+          i++;
         });
-        console.log(storeTodos);
+      });
+      theTODO.addEventListener("click", () => {
+        console.log("WORKS");
       });
     });
   }
@@ -540,6 +555,15 @@ export default function projectsPage() {
 
       return;
     }
+    let checker;
+    storeTodos[projectName.textContent].forEach((todo) => {
+      if (todo.title === nameToDo.value) return (checker = true);
+    });
+
+    if (checker === true) {
+      alert("The todo already exists!");
+      return;
+    }
 
     todos.removeChild(newToDo);
 
@@ -591,7 +615,7 @@ export default function projectsPage() {
     imgDiv.appendChild(deleteB).classList.add("delete-to-do");
     theTODO.appendChild(imgDiv).classList.add("img-div");
     todos.appendChild(theTODO).classList.add("the-to-do");
-    console.log(storeTodos);
+
     storeTodos[projectName.textContent].push({
       title: nameToDo,
       description: description,
@@ -602,13 +626,23 @@ export default function projectsPage() {
     localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
 
     deleteB.addEventListener("click", () => {
+      let i = 0;
       todos.removeChild(theTODO);
       storeTodos[projectName.textContent].forEach((todo) => {
         if (todo.title === theName.textContent) {
-          console.log(theName.textContent);
+          storeTodos[projectName.textContent].splice(i, 1);
+          localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+          i = 0;
         }
-        console.log(storeTodos);
+        i++;
       });
     });
+    theTODO.addEventListener("click", () => {
+      console.log(theName.textContent);
+    });
   };
+
+  //Function that opens the todos when clicked on them and let's the user edit that to-do
+
+  function openingTodo() {}
 }
