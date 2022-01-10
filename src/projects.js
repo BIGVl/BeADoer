@@ -312,7 +312,7 @@ export default function projectsPage() {
 
     //Opens the menu that creates a new to-do
     addTask.addEventListener("click", addingTasks);
-
+    console.log(storeTodos);
     //Creates all the saved to-do lists
     storeTodos[title].forEach((todo) => {
       const theTODO = document.createElement("div");
@@ -359,6 +359,16 @@ export default function projectsPage() {
       imgDiv.appendChild(deleteB).classList.add("delete-to-do");
       theTODO.appendChild(imgDiv).classList.add("img-div");
       todos.appendChild(theTODO).classList.add("the-to-do");
+
+      deleteB.addEventListener("click", () => {
+        todos.removeChild(theTODO);
+        storeTodos[projectName.textContent].forEach((todo) => {
+          if (todo.title === theName.textContent) {
+            console.log(storeTodos[projectName.textContent][todo.title]);
+          }
+        });
+        console.log(storeTodos);
+      });
     });
   }
 
@@ -581,14 +591,24 @@ export default function projectsPage() {
     imgDiv.appendChild(deleteB).classList.add("delete-to-do");
     theTODO.appendChild(imgDiv).classList.add("img-div");
     todos.appendChild(theTODO).classList.add("the-to-do");
-
+    console.log(storeTodos);
     storeTodos[projectName.textContent].push({
-      title: nameToDo.value,
-      description: descriptionToDo.value,
+      title: nameToDo,
+      description: description,
       dueDate: todoDueDate.value,
       priority: priority.textContent,
     });
 
     localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+
+    deleteB.addEventListener("click", () => {
+      todos.removeChild(theTODO);
+      storeTodos[projectName.textContent].forEach((todo) => {
+        if (todo.title === theName.textContent) {
+          console.log(theName.textContent);
+        }
+        console.log(storeTodos);
+      });
+    });
   };
 }
