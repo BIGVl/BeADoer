@@ -762,9 +762,11 @@
 }
 
 .the-to-do.opened {
-  height: 35vh;
-  width: 90%;
+  height: 28vh;
+  width: 60%;
   gap: 10px;
+  grid-template-rows: 30% 40% 30%;
+  grid-template-columns: 70% 30%;
 }
 
 .edit-name,
@@ -793,16 +795,22 @@
   font-family: inherit;
   align-self: center;
   border: none;
+  padding: 8px;
+  border-radius: 15px;
 }
 
 .edit-pr-div {
   display: flex;
   flex-wrap: wrap;
+  grid-row-start: -3;
+  grid-row-end: -1;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 
 .edit-flag {
-  height: 30%;
-  margin-left: 20%;
+  height: 22%;
+  margin-left: 30%;
 }
 
 .edit-pr-label {
@@ -816,7 +824,7 @@
   padding-right: 1px;
   height: 12px;
   width: 50%;
-  margin-left: 20%;
+  margin-left: 30%;
   margin-top: -10%;
 }
 
@@ -841,4 +849,34 @@
     background: #78e9cc;
     box-shadow: -80px 0 0 80px #002d38;
   }
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-close {
+  width: 36px;
+  height: 36px;
+}
+
+.edit-confirm {
+  width: 15%;
+  height: 50%;
+  background: #004e64;
+  font-family: inherit;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10%;
+}
+
+.edit-confirm:hover {
+  background: #007a9a;
+}
+
+.edit-confirm:active {
+  background: #5acdc0;
 }

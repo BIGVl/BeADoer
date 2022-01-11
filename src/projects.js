@@ -5,8 +5,6 @@ import moreIMG from "./Img/more.png";
 import closeIMG from "./Img/close.png";
 import flagCircle from "./Img/flag-circle.png";
 import { parseISO } from "date-fns";
-import { once } from "lodash";
-import { id } from "date-fns/locale";
 
 //Stores the titles of the projects created so it can give the right index to each one of them
 
@@ -631,15 +629,19 @@ export default function projectsPage() {
         i++;
       });
     });
-    theTODO.addEventListener("click", function () {
-      openingTodo(
-        theTODO,
-        nameToDo,
-        description,
-        todoDueDate.value,
-        priority.textContent
-      );
-    });
+    theTODO.addEventListener(
+      "click",
+      function () {
+        openingTodo(
+          theTODO,
+          nameToDo,
+          description,
+          todoDueDate.value,
+          priority.textContent
+        );
+      },
+      { once: true }
+    );
   };
 
   //Function that opens the todos when clicked on them and let's the user edit that to-do
@@ -647,10 +649,18 @@ export default function projectsPage() {
   function openingTodo(todo, title, desc, date, priority) {
     if (todo.classList.contains("opened")) return;
 
-    for (let i = 0; i < 4; i++) {
-      todo.removeChild(todo.lastChild);
+    const storeState = {
+      title: title,
+      desc: desc,
+      date: date,
+      priority: priority,
+    };
+    if (todo.firstChild) {
+      for (let i = 0; i < 4; i++) {
+        todo.removeChild(todo.lastChild);
+      }
+      todo.classList.add("opened");
     }
-    todo.classList.add("opened");
 
     const editName = document.createElement("textarea");
     const editDescription = document.createElement("textarea");
@@ -659,6 +669,9 @@ export default function projectsPage() {
     const editPriority = document.createElement("input");
     const flag = document.createElement("img");
     const priorityLabel = document.createElement("label");
+    const buttons = document.createElement("div");
+    const close = document.createElement("img");
+    const confirm = document.createElement("button");
 
     editName.setAttribute("placeholder", "To do");
     editDescription.setAttribute("placeholder", "Description");
@@ -669,6 +682,8 @@ export default function projectsPage() {
     editPriority.setAttribute("id", "edit-priority");
     priorityLabel.setAttribute("for", "edit-priority");
     flag.setAttribute("src", flagCircle);
+    confirm.textContent = "Confirm";
+    close.setAttribute("src", closeIMG);
 
     editName.textContent = title;
     editDescription.textContent = desc;
@@ -688,8 +703,19 @@ export default function projectsPage() {
     priorityDiv.appendChild(priorityLabel).classList.add("edit-pr-label");
     priorityDiv.appendChild(editPriority).classList.add("edit-priority");
     todo.appendChild(priorityDiv).classList.add("edit-pr-div");
-  }
+    buttons.appendChild(close).classList.add("edit-close");
+    buttons.appendChild(confirm).classList.add("edit-confirm");
+    todo.appendChild(buttons).classList.add("edit-buttons");
 
+    close.addEventListener("click", () => {
+      todo.classList.remove("opened");
+      for (let i = 0; i < 4; i++) {
+        if (todo.firstChild) todo.removeChild(todo.lastChild);
+      }
+      console.log(storeState);
+    });
+  }
+  //Checks what priority was chosen on the opened todo so when the todo is opened the priority it will be updated
   function checkPriority(priority, flag, label) {
     if (priority === "0") {
       flag.style.cssText =
