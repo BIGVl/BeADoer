@@ -5,7 +5,8 @@ import moreIMG from "./Img/more.png";
 import closeIMG from "./Img/close.png";
 import flagCircle from "./Img/flag-circle.png";
 import { parseISO } from "date-fns";
-import { check } from "prettier";
+import { once } from "lodash";
+import { id } from "date-fns/locale";
 
 //Stores the titles of the projects created so it can give the right index to each one of them
 
@@ -353,7 +354,7 @@ export default function projectsPage() {
       } else if (todo.priority === "1") {
         flag.style.cssText =
           "filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);";
-      } else if (todo.priorityt === "2") {
+      } else if (todo.priority === "2") {
         flag.style.cssText =
           "filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);";
       } else if (todo.priority === "3") {
@@ -381,8 +382,14 @@ export default function projectsPage() {
           i++;
         });
       });
-      theTODO.addEventListener("click", () => {
-        console.log("WORKS");
+      theTODO.addEventListener("click", function () {
+        openingTodo(
+          theTODO,
+          todo.title,
+          todo.description,
+          todo.dueDate,
+          todo.priority
+        );
       });
     });
   }
@@ -445,10 +452,8 @@ export default function projectsPage() {
     priority3.dataset.priority = 4;
     priority4.dataset.priority = 5;
 
-    nameToDo.setAttribute("type", "text");
     nameToDo.setAttribute("placeholder", " ");
     nameToDoLabel.textContent = "To-do";
-    descriptionToDo.setAttribute("type", "text");
     descriptionToDo.setAttribute("placeholder", " ");
     descriptionToDoLabel.textContent = "Description";
     todoDueDate.setAttribute("type", "datetime-local");
@@ -530,12 +535,8 @@ export default function projectsPage() {
 
   function confirmingAddToDo(newToDo) {
     const overmax = document.createElement("div");
-    if (
-      nameToDo.value === "" ||
-      descriptionToDo.value === "" ||
-      nameToDo.value.length > 50
-    ) {
-      if (nameToDo.value === "" || nameToDo.value.length > 50)
+    if (nameToDo.value === "" || descriptionToDo.value === "") {
+      if (nameToDo.value === "")
         nameToDo.style.cssText = "border: 3px solid red;";
       else {
         nameToDo.style.cssText = "border: 3px solid #004E64;";
@@ -544,13 +545,6 @@ export default function projectsPage() {
         descriptionToDo.style.cssText = "border: 3px solid red;";
       else {
         descriptionToDo.style.cssText = "border: 3px solid #007A9A;";
-      }
-      if (nameToDo.value.length > 50) {
-        overmax.textContent =
-          "The title or the description can not be longer that 50 characters!";
-        newToDo.appendChild(overmax).classList.add("overmax-new");
-      } else if (newToDo.contains(overmax)) {
-        newToDo.removeChild(overmax);
       }
 
       return;
@@ -637,12 +631,82 @@ export default function projectsPage() {
         i++;
       });
     });
-    theTODO.addEventListener("click", () => {
-      console.log(theName.textContent);
+    theTODO.addEventListener("click", function () {
+      openingTodo(
+        theTODO,
+        nameToDo,
+        description,
+        todoDueDate.value,
+        priority.textContent
+      );
     });
   };
 
   //Function that opens the todos when clicked on them and let's the user edit that to-do
 
-  function openingTodo() {}
+  function openingTodo(todo, title, desc, date, priority) {
+    if (todo.classList.contains("opened")) return;
+
+    for (let i = 0; i < 4; i++) {
+      todo.removeChild(todo.lastChild);
+    }
+    todo.classList.add("opened");
+
+    const editName = document.createElement("textarea");
+    const editDescription = document.createElement("textarea");
+    const editDate = document.createElement("input");
+    const priorityDiv = document.createElement("div");
+    const editPriority = document.createElement("input");
+    const flag = document.createElement("img");
+    const priorityLabel = document.createElement("label");
+
+    editName.setAttribute("placeholder", "To do");
+    editDescription.setAttribute("placeholder", "Description");
+    editDate.setAttribute("type", "datetime-local");
+    editPriority.setAttribute("type", "range");
+    editPriority.setAttribute("min", "0");
+    editPriority.setAttribute("max", "3");
+    editPriority.setAttribute("id", "edit-priority");
+    priorityLabel.setAttribute("for", "edit-priority");
+    flag.setAttribute("src", flagCircle);
+
+    editName.textContent = title;
+    editDescription.textContent = desc;
+    editDate.value = date;
+    editPriority.value = priority;
+
+    checkPriority(editPriority.value, flag, priorityLabel);
+
+    editPriority.addEventListener("input", () => {
+      checkPriority(editPriority.value, flag, priorityLabel);
+    });
+
+    todo.appendChild(editName).classList.add("edit-name");
+    todo.appendChild(editDate).classList.add("edit-date");
+    todo.appendChild(editDescription).classList.add("edit-description");
+    priorityDiv.appendChild(flag).classList.add("edit-flag");
+    priorityDiv.appendChild(priorityLabel).classList.add("edit-pr-label");
+    priorityDiv.appendChild(editPriority).classList.add("edit-priority");
+    todo.appendChild(priorityDiv).classList.add("edit-pr-div");
+  }
+
+  function checkPriority(priority, flag, label) {
+    if (priority === "0") {
+      flag.style.cssText =
+        "filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);";
+      label.textContent = "Very high";
+    } else if (priority === "1") {
+      label.textContent = "High";
+      flag.style.cssText =
+        "filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);";
+    } else if (priority === "2") {
+      label.textContent = "Medium";
+      flag.style.cssText =
+        "filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);";
+    } else if (priority === "3") {
+      label.textContent = "Low";
+      flag.style.cssText =
+        "filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);";
+    }
+  }
 }

@@ -715,6 +715,9 @@
   flex-direction: column;
   align-self: center;
   font-size: 1.2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .the-name::after {
@@ -747,8 +750,7 @@
   margin-right: 15px;
 }
 
-.delete-to-do,
-.edit-to-do {
+.delete-to-do {
   width: 1.5rem;
   height: 1.5rem;
   align-self: flex-end;
@@ -757,4 +759,86 @@
 
 .the-due {
   font-size: 0.9rem;
+}
+
+.the-to-do.opened {
+  height: 35vh;
+  width: 90%;
+  gap: 10px;
+}
+
+.edit-name,
+.edit-description {
+  padding: 5px;
+  background: transparent;
+  font-family: inherit;
+  border: none;
+  font-size: 1.2rem;
+  text-decoration: none;
+  resize: none;
+}
+.edit-description {
+  font-size: 0.9rem;
+}
+.edit-description:focus,
+.edit-name:focus {
+  outline: none;
+  text-decoration: none;
+}
+
+.edit-date {
+  height: fit-content;
+  background: #002d38;
+  color: white;
+  font-family: inherit;
+  align-self: center;
+  border: none;
+}
+
+.edit-pr-div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit-flag {
+  height: 30%;
+  margin-left: 20%;
+}
+
+.edit-pr-label {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.edit-priority {
+  border-radius: 10px;
+  padding-left: 1px;
+  padding-right: 1px;
+  height: 12px;
+  width: 50%;
+  margin-left: 20%;
+  margin-top: -10%;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type="range"] {
+    overflow: hidden;
+    -webkit-appearance: none;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 12px;
+    -webkit-appearance: none;
+    color: #002d38;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    width: 15px;
+    -webkit-appearance: none;
+    border-radius: 40%;
+    height: 12px;
+    cursor: ew-resize;
+    background: #78e9cc;
+    box-shadow: -80px 0 0 80px #002d38;
+  }
 }
