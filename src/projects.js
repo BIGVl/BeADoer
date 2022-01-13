@@ -380,15 +380,19 @@ export default function projectsPage() {
           i++;
         });
       });
-      theTODO.addEventListener("click", function () {
-        openingTodo(
-          theTODO,
-          todo.title,
-          todo.description,
-          todo.dueDate,
-          todo.priority
-        );
-      });
+      theTODO.addEventListener(
+        "click",
+        function () {
+          openingTodo(
+            theTODO,
+            todo.title,
+            todo.description,
+            todo.dueDate,
+            todo.priority
+          );
+        },
+        { capture: true }
+      );
     });
   }
 
@@ -640,7 +644,7 @@ export default function projectsPage() {
           priority.textContent
         );
       },
-      { once: true }
+      { capture: true }
     );
   };
 
@@ -655,6 +659,7 @@ export default function projectsPage() {
       date: date,
       priority: priority,
     };
+
     if (todo.firstChild) {
       for (let i = 0; i < 4; i++) {
         todo.removeChild(todo.lastChild);
@@ -706,13 +711,55 @@ export default function projectsPage() {
     buttons.appendChild(close).classList.add("edit-close");
     buttons.appendChild(confirm).classList.add("edit-confirm");
     todo.appendChild(buttons).classList.add("edit-buttons");
-
+    //Closes the todo without applying any changes after the todo was opened
     close.addEventListener("click", () => {
       todo.classList.remove("opened");
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         if (todo.firstChild) todo.removeChild(todo.lastChild);
       }
-      console.log(storeState);
+
+      const closetitle = document.createElement("div");
+      const closedesc = document.createElement("div");
+      const closedue = document.createElement("div");
+      const flag = document.createElement("img");
+      const deleteB = document.createElement("img");
+      const imgDiv = document.createElement("div");
+      const label = document.createElement("div");
+
+      closetitle.textContent = storeState.title;
+      closedesc.textContent = storeState.desc;
+      flag.setAttribute("src", flagCircle);
+      deleteB.setAttribute("src", deleteIMG);
+
+      if (storeState.date === "") {
+        closedue.textContent = "Due not set";
+      } else {
+        closedue.textContent = formatDistanceToNow(parseISO(storeState.date), {
+          addSuffix: true,
+        });
+      }
+
+      checkPriority(storeState.priority, flag, label);
+
+      deleteB.addEventListener("click", () => {
+        let i = 0;
+        todos.removeChild(todo);
+        storeTodos[projectName.textContent].forEach((todo) => {
+          if (todo.title === closetitle.textContent) {
+            storeTodos[projectName.textContent].splice(i, 1);
+            localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+            i = 0;
+          }
+          i++;
+        });
+      });
+
+      todo.appendChild(closetitle).classList.add("the-name");
+      todo.appendChild(closedue).classList.add("the-due");
+      todo.appendChild(closedesc).classList.add("the-description");
+      imgDiv.appendChild(flag).classList.add("flag");
+      imgDiv.appendChild(deleteB).classList.add("delete-to-do");
+      todo.appendChild(imgDiv).classList.add("img-div");
     });
   }
   //Checks what priority was chosen on the opened todo so when the todo is opened the priority it will be updated
@@ -735,4 +782,6 @@ export default function projectsPage() {
         "filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);";
     }
   }
+
+  //Confirms the todo changes and applies them when the user clicks on the confirm button of the opened todo
 }

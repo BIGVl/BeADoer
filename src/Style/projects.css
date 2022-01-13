@@ -12,8 +12,8 @@
 }
 
 .addCard {
-  width: 20%;
-  height: 50%;
+  width: 22%;
+  height: 55%;
   background: #78e9cc;
   display: flex;
   justify-content: center;
@@ -174,8 +174,8 @@
 }
 
 .new-project-card {
-  width: 20%;
-  height: 50%;
+  width: 22%;
+  height: 55%;
   background: #78e9cc;
   border-radius: 5px;
   display: flex;
@@ -222,6 +222,7 @@
   border-radius: 5px;
   font-weight: bold;
   font-family: inherit;
+  padding: 1px;
 }
 
 .due-date-label {
@@ -263,7 +264,6 @@
   height: 10%;
   align-self: flex-end;
   margin-right: 10px;
-  margin-bottom: 3px;
 }
 
 .deleteB:hover {
@@ -826,6 +826,7 @@
   width: 50%;
   margin-left: 30%;
   margin-top: -10%;
+  background: #002d38;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -847,7 +848,6 @@
     height: 12px;
     cursor: ew-resize;
     background: #78e9cc;
-    box-shadow: -80px 0 0 80px #002d38;
   }
 }
 
@@ -871,6 +871,7 @@
   border: none;
   border-radius: 5px;
   margin-right: 10%;
+  cursor: pointer;
 }
 
 .edit-confirm:hover {
