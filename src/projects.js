@@ -349,15 +349,19 @@ export default function projectsPage() {
       if (todo.priority === "0") {
         flag.style.cssText =
           "filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);";
+        flag.dataset.flag = 0;
       } else if (todo.priority === "1") {
         flag.style.cssText =
           "filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);";
+        flag.dataset.flag = 1;
       } else if (todo.priority === "2") {
         flag.style.cssText =
           "filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);";
+        flag.dataset.flag = 2;
       } else if (todo.priority === "3") {
         flag.style.cssText =
           "filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);";
+        flag.dataset.flag = 3;
       }
 
       theTODO.appendChild(theName).classList.add("the-name");
@@ -380,19 +384,7 @@ export default function projectsPage() {
           i++;
         });
       });
-      theTODO.addEventListener(
-        "click",
-        function () {
-          openingTodo(
-            theTODO,
-            todo.title,
-            todo.description,
-            todo.dueDate,
-            todo.priority
-          );
-        },
-        { capture: true }
-      );
+      theTODO.addEventListener("click", openingTodo, { capture: true });
     });
   }
 
@@ -592,15 +584,19 @@ export default function projectsPage() {
     if (priority.textContent === "0") {
       flag.style.cssText =
         "filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);";
+      flag.dataset.flag = 0;
     } else if (priority.textContent === "1") {
       flag.style.cssText =
         "filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);";
+      flag.dataset.flag = 1;
     } else if (priority.textContent === "2") {
       flag.style.cssText =
         "filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);";
+      flag.dataset.flag = 2;
     } else if (priority.textContent === "3") {
       flag.style.cssText =
         "filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);";
+      flag.dataset.flag = 3;
     }
 
     theTODO.appendChild(theName).classList.add("the-name");
@@ -633,24 +629,27 @@ export default function projectsPage() {
         i++;
       });
     });
-    theTODO.addEventListener(
-      "click",
-      function () {
-        openingTodo(
-          theTODO,
-          nameToDo,
-          description,
-          todoDueDate.value,
-          priority.textContent
-        );
-      },
-      { capture: true }
-    );
+
+    theTODO.addEventListener("click", openingTodo, { capture: true });
   };
 
   //Function that opens the todos when clicked on them and let's the user edit that to-do
+  let newState = {};
+  function openingTodo(e) {
+    const todo = e.target.closest(".the-to-do");
+    const arraytodo = Array.from(todo.children);
+    const title = arraytodo[0].textContent;
+    const desc = arraytodo[2].textContent;
+    let date;
+    const divPriority = Array.from(arraytodo[3].children);
+    const priority = divPriority[0].dataset.flag;
 
-  function openingTodo(todo, title, desc, date, priority) {
+    storeTodos[projectName.textContent].forEach((todo) => {
+      if (todo.title === title) {
+        date = todo.dueDate;
+      }
+    });
+
     if (todo.classList.contains("opened")) return;
 
     const storeState = {
@@ -678,6 +677,11 @@ export default function projectsPage() {
     const close = document.createElement("img");
     const confirm = document.createElement("button");
 
+    editName.textContent = title;
+    editDescription.textContent = desc;
+    editDate.value = date;
+    editPriority.value = priority;
+
     editName.setAttribute("placeholder", "To do");
     editDescription.setAttribute("placeholder", "Description");
     editDate.setAttribute("type", "datetime-local");
@@ -689,11 +693,6 @@ export default function projectsPage() {
     flag.setAttribute("src", flagCircle);
     confirm.textContent = "Confirm";
     close.setAttribute("src", closeIMG);
-
-    editName.textContent = title;
-    editDescription.textContent = desc;
-    editDate.value = date;
-    editPriority.value = priority;
 
     checkPriority(editPriority.value, flag, priorityLabel);
 
@@ -711,6 +710,7 @@ export default function projectsPage() {
     buttons.appendChild(close).classList.add("edit-close");
     buttons.appendChild(confirm).classList.add("edit-confirm");
     todo.appendChild(buttons).classList.add("edit-buttons");
+    console.log(editName.textContent);
     //Closes the todo without applying any changes after the todo was opened
     close.addEventListener("click", () => {
       todo.classList.remove("opened");
@@ -726,15 +726,15 @@ export default function projectsPage() {
       const imgDiv = document.createElement("div");
       const label = document.createElement("div");
 
-      closetitle.textContent = storeState.title;
-      closedesc.textContent = storeState.desc;
+      closetitle.textContent = title;
+      closedesc.textContent = desc;
       flag.setAttribute("src", flagCircle);
       deleteB.setAttribute("src", deleteIMG);
 
-      if (storeState.date === "") {
+      if (date === "") {
         closedue.textContent = "Due not set";
       } else {
-        closedue.textContent = formatDistanceToNow(parseISO(storeState.date), {
+        closedue.textContent = formatDistanceToNow(parseISO(date), {
           addSuffix: true,
         });
       }
@@ -761,6 +761,81 @@ export default function projectsPage() {
       imgDiv.appendChild(deleteB).classList.add("delete-to-do");
       todo.appendChild(imgDiv).classList.add("img-div");
     });
+
+    //Confirms the todo changes and applies them when the user clicks on the confirm button of the opened todo
+
+    confirm.addEventListener("click", () => {
+      todo.classList.remove("opened");
+      for (let i = 0; i < 5; i++) {
+        if (todo.firstChild) todo.removeChild(todo.lastChild);
+      }
+
+      const closetitle = document.createElement("div");
+      const closedesc = document.createElement("div");
+      const closedue = document.createElement("div");
+      const flag = document.createElement("img");
+      const deleteB = document.createElement("img");
+      const imgDiv = document.createElement("div");
+      const label = document.createElement("div");
+
+      closetitle.textContent = editName.value;
+      closedesc.textContent = editDescription.value;
+      flag.setAttribute("src", flagCircle);
+      deleteB.setAttribute("src", deleteIMG);
+
+      if (editDate.value === "") {
+        closedue.textContent = "Due not set";
+      } else {
+        closedue.textContent = formatDistanceToNow(parseISO(editDate.value), {
+          addSuffix: true,
+        });
+      }
+
+      newState.title = editName.value;
+      newState.desc = editDescription.value;
+      newState.date = editDate.value;
+      newState.priority = editPriority.value;
+      checkPriority(editPriority.value, flag, label);
+
+      deleteB.addEventListener("click", () => {
+        let i = 0;
+        todos.removeChild(todo);
+        storeTodos[projectName.textContent].forEach((todo) => {
+          if (todo.title === closetitle.textContent) {
+            storeTodos[projectName.textContent].splice(i, 1);
+            localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+            i = 0;
+          }
+          i++;
+        });
+      });
+
+      storeTodos[projectName.textContent].forEach((todo) => {
+        let i = 0;
+        if (todo.title === storeState.title) {
+          storeTodos[projectName.textContent].splice(i, 1);
+          localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+
+          i = 0;
+        }
+        i++;
+      });
+      storeTodos[projectName.textContent].push({
+        title: editName.value,
+        description: editDescription.value,
+        dueDate: editDate.value,
+        priority: editPriority.value,
+      });
+      localStorage.setItem("PROJECTS", JSON.stringify(storeTodos));
+      console.log(storeTodos);
+
+      todo.appendChild(closetitle).classList.add("the-name");
+      todo.appendChild(closedue).classList.add("the-due");
+      todo.appendChild(closedesc).classList.add("the-description");
+      imgDiv.appendChild(flag).classList.add("flag");
+      imgDiv.appendChild(deleteB).classList.add("delete-to-do");
+      todo.appendChild(imgDiv).classList.add("img-div");
+    });
   }
   //Checks what priority was chosen on the opened todo so when the todo is opened the priority it will be updated
   function checkPriority(priority, flag, label) {
@@ -768,20 +843,22 @@ export default function projectsPage() {
       flag.style.cssText =
         "filter: invert(12%) sepia(77%) saturate(7356%) hue-rotate(4deg) brightness(100%) contrast(116%);";
       label.textContent = "Very high";
+      flag.dataset.flag = 0;
     } else if (priority === "1") {
       label.textContent = "High";
       flag.style.cssText =
         "filter: invert(50%) sepia(96%) saturate(883%) hue-rotate(360deg) brightness(105%) contrast(104%);";
+      flag.dataset.flag = 1;
     } else if (priority === "2") {
       label.textContent = "Medium";
       flag.style.cssText =
         "filter: invert(94%) sepia(21%) saturate(2479%) hue-rotate(2deg) brightness(107%) contrast(106%);";
+      flag.dataset.flag = 2;
     } else if (priority === "3") {
       label.textContent = "Low";
       flag.style.cssText =
         "filter: invert(53%) sepia(66%) saturate(2619%) hue-rotate(85deg) brightness(117%) contrast(128%);";
+      flag.dataset.flag = 3;
     }
   }
-
-  //Confirms the todo changes and applies them when the user clicks on the confirm button of the opened todo
 }
