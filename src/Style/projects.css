@@ -881,3 +881,172 @@
 .edit-confirm:active {
   background: #5acdc0;
 }
+
+@media all and (max-width: 850px) {
+  .projects-content {
+    width: 90vw;
+    height: 90vh;
+    right: 2px;
+    gap: 5%;
+    padding-left: 2px;
+    left: 5%;
+  }
+
+  .addCard {
+    width: 45%;
+    height: 45%;
+  }
+
+  .addButton::before,
+  .addButton::after {
+    height: 12%;
+    width: 5px;
+  }
+
+  .new-project-card {
+    width: 45%;
+    height: 45%;
+    padding-bottom: 5px;
+  }
+  .new-header {
+    font-size: 1rem;
+    padding-top: 2px;
+  }
+
+  .new-title {
+    padding-top: 2px;
+  }
+  .new-title::after {
+    height: 1px;
+  }
+
+  .date-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .new-due-date {
+    font-size: 0.6rem;
+    padding: 4px;
+    width: 80%;
+    margin-bottom: 10px;
+    margin-right: 15%;
+    margin-top: 0;
+  }
+
+  .due-date-label {
+    font-size: 0.7rem;
+    padding-bottom: 5px;
+    margin-top: 20%;
+  }
+
+  .project-modal {
+    width: 90%;
+    left: 50%;
+    transform: translate(-50%);
+    justify-content: unset;
+    gap: 15px;
+    padding-bottom: 0px;
+  }
+
+  .project-label {
+    font-size: 1rem;
+    display: flex;
+  }
+
+  .project-name {
+    width: 95%;
+    font-size: 1rem;
+  }
+
+  .close-modal {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1%;
+    height: 4%;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    align-self: flex-end;
+    margin-right: 15px;
+  }
+  .label-description {
+    font-size: 1rem;
+  }
+
+  .project-description {
+    font-size: 1rem;
+    width: 95%;
+    height: 15%;
+  }
+
+  .submit {
+    font-size: 1rem;
+    width: 30%;
+    height: 15%;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .project {
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 80%;
+  }
+
+  .named-project {
+    font-size: 1.5rem;
+    padding-top: 15px;
+    margin-left: -10%;
+  }
+  .right-buttons {
+    gap: 5px;
+  }
+
+  .add-task {
+    font-size: 0.5rem;
+  }
+  .project.notes {
+    font-size: 0.5rem;
+  }
+
+  .due {
+    margin-right: 47%;
+  }
+
+  .todos {
+    grid-row-start: 3;
+    width: 100%;
+  }
+  .the-to-do {
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 19vh;
+    padding-left: 1rem;
+    padding-right: 15px;
+    padding-top: 5px;
+    border-radius: 0px;
+  }
+  .the-name {
+    font-size: 1rem;
+  }
+  .the-description {
+    font-size: 1rem;
+  }
+  .the-due {
+    font-size: 0.9rem;
+    padding-left: 5px;
+  }
+  .img-div {
+    justify-content: unset;
+  }
+  .flag {
+    margin-right: 5px;
+  }
+}

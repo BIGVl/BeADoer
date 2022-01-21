@@ -91,3 +91,23 @@ input[type="text"]:focus {
   outline: #25a18e;
   outline-width: 3px;
 }
+@media all and (max-width: 850px) {
+  .header {
+    height: 3rem;
+    font-size: 2rem;
+  }
+
+  .menu {
+    margin-left: -20%;
+    font-size: 1rem;
+    transition: margin-left 200ms ease-in;
+  }
+
+  .menu.visible {
+    margin-left: 0;
+  }
+
+  .content {
+    left: 5%;
+  }
+}

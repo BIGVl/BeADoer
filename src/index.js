@@ -42,3 +42,15 @@ projectsOpen.addEventListener("click", () => {
   }
   projects();
 });
+
+//Making the left-menu slide back on the screen when the user touches it while on phone or tablet
+
+const menu = document.querySelector(".menu");
+
+menu.addEventListener(
+  "touchstart",
+  () => {
+    menu.classList.toggle("visible");
+  },
+  { capture: true }
+);
